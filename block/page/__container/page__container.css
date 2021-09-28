@@ -1,11 +1,11 @@
 .page__container {
    display: grid;
    grid-template-columns: minmax(282px, 880px);
-   margin: 45px 19px 60px;
+   margin: 45px auto 60px;
 }
 
 @media (max-width: 768px) {
    .page__container {
-      margin: 28px 19px 36px;
+      margin: 28px auto 36px;
    }
 }
