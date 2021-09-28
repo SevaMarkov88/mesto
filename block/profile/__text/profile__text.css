@@ -1,0 +1,6 @@
+.profile__text {
+  max-height: 73px;
+  min-height: 54px;
+  display: grid;
+  align-content: space-between;
+}

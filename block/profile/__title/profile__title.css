@@ -1,0 +1,6 @@
+.profile__title {
+   font-weight: 500;
+   line-height: 114%;
+   font-size: calc(27px + 13 * (100vw / 1280));
+   margin: 0;
+}
