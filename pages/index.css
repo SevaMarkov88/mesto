@@ -6,3 +6,10 @@
 
 /* page */
 @import url(/block/page/page.css);
+@import url(/block/page/__container/page__container.css);
+
+/* logo */
+@import url(/block/logo/logo.css);
+
+/* header */
+@import url(/block/header/header.css);
