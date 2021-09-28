@@ -1,9 +1,15 @@
 .profile__button_edit {
-   border: 1px solid #FFFFFF;
-   background-color: #000;
-   padding: 0;
-   box-sizing: border-box;
-   width: 24px;
-   height: 24px;
-   margin: 15px 0 0 17px;
+  border: 1px solid #ffffff;
+  background-color: #000;
+  padding: 0;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  margin: 16px 0 0 21px;
+}
+
+@media (max-width: 320px) {
+  .profile__button_edit {
+    margin: 6px 0 0 10px;
+  }
 }

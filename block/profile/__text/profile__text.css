@@ -1,6 +1,10 @@
 .profile__text {
-  max-height: 73px;
-  min-height: 54px;
-  display: grid;
-  align-content: space-between;
+  
+}
+
+
+@media (max-width: 320px) {
+   .profile__text {
+      margin-left: 33px;
+   }
 }

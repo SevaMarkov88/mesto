@@ -7,3 +7,15 @@
   width: 150px;
   height: 50px;
 }
+
+@media (max-width: 615px) {
+  .profile__button_add {
+    width: 282px;
+  }
+}
+
+@media (max-width: 320px) {
+  .profile__button_add {
+    margin-top: 6px;
+  }
+}
