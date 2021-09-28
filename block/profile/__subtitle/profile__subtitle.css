@@ -1,0 +1,6 @@
+.profile__subtitle {
+   font-weight: 500;
+   line-height: 99%;
+   font-size: calc(14px + 4 * (100vw / 1280));
+   margin: 0;
+}

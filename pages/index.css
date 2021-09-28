@@ -13,3 +13,16 @@
 
 /* header */
 @import url(/block/header/header.css);
+
+/* main */
+@import url(/block/main/main.css);
+
+/* profile */
+@import url(/block/profile/profile.css);
+@import url(/block/profile/__image/profile__image.css);
+@import url(/block/profile/__info/profile__info.css);
+@import url(/block/profile/__text/profile__text.css);
+@import url(/block/profile/__title/profile__title.css);
+@import url(/block/profile/__subtitle/profile__subtitle.css);
+@import url(/block/profile/__button/profile__button_edit.css);
+@import url(/block/profile/__button/profile__button_add.css);
