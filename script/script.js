@@ -19,6 +19,17 @@ function closePopup() {
   }
 }
 
+//like element
+
+let elementLike = Array.from(document.querySelectorAll('.element__like'));
+
+elementLike.forEach((img, index) => {
+  img.addEventListener("click", () => {
+    img.classList.toggle("element__like_active");
+    img.setAttribute('style', 'opacity: 1');
+  });
+});
+
 //input to profile
 
 let profileTitle = document.querySelector(".profile__title");
@@ -42,8 +53,18 @@ function formSubmitHandler(evt) {
   let job = jobInput.value;
   let name = nameInput.value;
 
+  if (name.length > 30) {
+    alert('Имя может быть не более 30 симвлов');
+    return
+  }
+  if (job.length > 50) {
+    alert('Профессия может быть не более 50 симвлов');
+    return
+  }
+
   profileTitle.textContent = name;
   progileSubtitle.textContent = job;
+
   closePopup();
 }
 
