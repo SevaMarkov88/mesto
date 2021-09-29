@@ -9,6 +9,7 @@
 @media (max-width: 615px) {
    .profile {
       grid-template-columns: 1fr;
-      justify-items: center
+      justify-items: center;
+      margin-bottom: 34px;
    }
 }

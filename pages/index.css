@@ -26,3 +26,12 @@
 @import url(/block/profile/__subtitle/profile__subtitle.css);
 @import url(/block/profile/__button/profile__button_edit.css);
 @import url(/block/profile/__button/profile__button_add.css);
+
+/* elements */
+@import url(/block/elements/elements.css);
+
+/* element */
+@import url(/block/element/element.css);
+@import url(/block/element/__image/element__image.css);
+@import url(/block/element/__text/element__text.css);
+@import url(/block/element/__title/element__title.css);
