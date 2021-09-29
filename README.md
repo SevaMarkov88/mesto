@@ -2,16 +2,39 @@
 
 ### Обзор
 
-* Figma
-* Картинки
+* Интро
+* Технологии
 
-**Figma**
+---
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+**Интро**
 
-**Картинки**
+Здесь будет проект о красивых местах нашей родины.
+Все изоброжения оптимизированны на [сайте доброй панды](https://tinypng.com).
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
 
-Удачи!
+**Технологии**
+
+* Grid Layout, Flex и медиазапросы дают сайту быть адаптивным.
+```css
+.elements {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, 282px);
+   row-gap: 20px;
+   column-gap: 17px;
+   justify-content: center;
+}
+```
+* JS оживляет проект и добавляет немного магии.
+```js
+let elementLike = Array.from(document.querySelectorAll('.element__like'));
+
+elementLike.forEach((img, index) => {
+  img.addEventListener("click", () => {
+    img.classList.toggle("element__like_active");
+    img.setAttribute('style', 'opacity: 1');
+  });
+});
+```
+
+
