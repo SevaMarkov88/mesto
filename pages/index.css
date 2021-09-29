@@ -40,3 +40,16 @@
 /* footer */
 @import url(/block/footer/footer.css);
 @import url(/block/footer/__text/footer__text.css);
+
+/* popup */
+@import url(/block/popup/popup.css);
+@import url(/block/popup/popup_opened.css);
+@import url(/block/popup/__container/popup__container.css);
+@import url(/block/popup/__form/popup__form.css);
+@import url(/block/popup/__title/popup__title.css);
+@import url(/block/popup/__text/popup__text.css);
+@import url(/block/popup/__button/popup__button.css);
+@import url(/block/popup/__close/popup__close.css);
+@import url(/block/popup/__image/popup__image.css);
+
+
