@@ -1,6 +1,6 @@
 // popup opening and closing
 
-const editButton = document.querySelector(".profile__button_edit");
+const editButton = document.querySelector(".profile__button-edit");
 const popupWindow = document.querySelector(".popup");
 const popupClose = document.querySelector(".popup__close");
 
