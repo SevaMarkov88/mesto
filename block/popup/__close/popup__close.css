@@ -1,0 +1,9 @@
+.popup__close {
+   margin: 0 0 8px 473px;
+}
+
+@media (max-width: 550px) {
+   .popup__close {
+      margin: 0 0 16px 260px;
+   }
+}

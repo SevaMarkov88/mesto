@@ -1,4 +1,9 @@
 .element {
    width: 282px;
    display: grid;
+   transition: transform ease 0.5s;
+}
+
+.element:hover {
+  transform: scale(1.05);
 }
