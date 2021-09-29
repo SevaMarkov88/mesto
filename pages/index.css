@@ -35,3 +35,7 @@
 @import url(/block/element/__image/element__image.css);
 @import url(/block/element/__text/element__text.css);
 @import url(/block/element/__title/element__title.css);
+
+/* footer */
+@import url(/block/footer/footer.css);
+@import url(/block/footer/__text/footer__text.css);
