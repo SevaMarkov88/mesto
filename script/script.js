@@ -25,10 +25,8 @@ let elementLike = Array.from(document.querySelectorAll(".element__like"));
 
 elementLike.forEach((img, index) => {
   img.addEventListener("click", () => {
-    if (img.classList.contains("element__like")) {
       img.classList.toggle("element__like_active");
       img.setAttribute("style", "opacity: 1");
-    }
   });
 });
 
