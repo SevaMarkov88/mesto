@@ -32,12 +32,12 @@ elementLike.forEach((img, index) => {
 
 //input to profile
 
-let profileTitle = document.querySelector('.profile__title');
-let progileSubtitle = document.querySelector('.profile__subtitle');
+const profileTitle = document.querySelector('.profile__title');
+const progileSubtitle = document.querySelector('.profile__subtitle');
 
-let formElement = document.querySelector('.popup__form');
-let nameInput = formElement.querySelector('.name-input');
-let jobInput = formElement.querySelector('.job-input');
+const formElement = document.querySelector('.popup__form');
+const nameInput = formElement.querySelector('.name-input');
+const jobInput = formElement.querySelector('.job-input');
 
 if (nameInput.value.length === 0) {
   nameInput.value = profileTitle.textContent;
