@@ -8,15 +8,11 @@ editButton.addEventListener("click", openPopup);
 popupClose.addEventListener("click", closePopup);
 
 function openPopup() {
-  if (!popupWindow.classList.contains("popup_opened")) {
-    popupWindow.classList.add("popup_opened");
-  }
+  popupWindow.classList.add("popup_opened");
 }
 
 function closePopup() {
-  if (popupWindow.classList.contains("popup_opened")) {
-    popupWindow.classList.remove("popup_opened");
-  }
+  popupWindow.classList.remove("popup_opened");
 }
 
 //like element
@@ -25,8 +21,9 @@ let elementLike = Array.from(document.querySelectorAll(".element__like"));
 
 elementLike.forEach((img, index) => {
   img.addEventListener("click", () => {
-      img.classList.toggle("element__like_active");
-      img.setAttribute("style", "opacity: 1");
+    img.classList.toggle("element__like_active");
+    img.classList.toggle("element__like");
+    img.setAttribute("style", "opacity: 1");
   });
 });
 
@@ -39,28 +36,14 @@ const formElement = document.querySelector(".popup__form");
 const nameInput = formElement.querySelector(".name-input");
 const jobInput = formElement.querySelector(".job-input");
 
-if (nameInput.value.length === 0) {
-  nameInput.value = profileTitle.textContent;
-}
-
-if (jobInput.value.length === 0) {
-  jobInput.value = progileSubtitle.textContent;
-}
+nameInput.value = profileTitle.textContent;
+jobInput.value = progileSubtitle.textContent;
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
   let job = jobInput.value;
   let name = nameInput.value;
-
-  if (name.length > 30) {
-    alert("Имя может быть не более 30 симвлов");
-    return;
-  }
-  if (job.length > 50) {
-    alert("Профессия может быть не более 50 симвлов");
-    return;
-  }
 
   profileTitle.textContent = name;
   progileSubtitle.textContent = job;
