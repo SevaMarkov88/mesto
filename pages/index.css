@@ -52,5 +52,7 @@
 @import url(../blocks/popup/__button/popup__button.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__text/_name/popup__text_name.css);
+@import url(../blocks/popup/__text/_job/popup__text_job.css);
 
 

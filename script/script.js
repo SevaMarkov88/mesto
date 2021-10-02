@@ -15,17 +15,6 @@ function closePopup() {
   popupWindow.classList.remove("popup_opened");
 }
 
-//like element
-
-let elementLike = Array.from(document.querySelectorAll(".element__like"));
-
-elementLike.forEach((img, index) => {
-  img.addEventListener("click", () => {
-    img.classList.toggle("element__like_active");
-    img.classList.toggle("element__like");
-    img.setAttribute("style", "opacity: 1");
-  });
-});
 
 //input to profile
 
@@ -33,8 +22,8 @@ const profileTitle = document.querySelector(".profile__title");
 const progileSubtitle = document.querySelector(".profile__subtitle");
 
 const formElement = document.querySelector(".popup__form");
-const nameInput = formElement.querySelector(".name-input");
-const jobInput = formElement.querySelector(".job-input");
+const nameInput = formElement.querySelector(".popup__text_name");
+const jobInput = formElement.querySelector(".popup__text_job");
 
 nameInput.value = profileTitle.textContent;
 jobInput.value = progileSubtitle.textContent;
