@@ -9,6 +9,10 @@
   background-repeat: no-repeat;
 }
 
+.popup__close:hover {
+  cursor: pointer;
+}
+
 @media (max-width: 550px) {
   .popup__close {
     margin: 0 0 16px 260px;
