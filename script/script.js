@@ -6,8 +6,8 @@ const popupClose = document.querySelector(".popup__close");
 const profileTitle = document.querySelector(".profile__title");
 const progileSubtitle = document.querySelector(".profile__subtitle");
 const formElement = document.querySelector(".popup__form");
-const nameInput = formElement.querySelector(".input_type_name");
-const jobInput = formElement.querySelector(".input_type_job");
+const nameInput = formElement.querySelector(".popup__input_name");
+const jobInput = formElement.querySelector(".popup__input_job");
 
 // Listeners
 
