@@ -19,12 +19,8 @@ formElement.addEventListener("submit", formSubmitHandler);
 
 function openPopup() {
   popupWindow.classList.add("popup_opened");
-  if (nameInput.value === "") {
-    nameInput.value = profileTitle.textContent;
-  }
-  if (jobInput.value === "") {
-    jobInput.value = progileSubtitle.textContent;
-  }
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = progileSubtitle.textContent;
 }
 
 function closePopup() {
