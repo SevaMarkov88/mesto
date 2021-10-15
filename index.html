@@ -44,14 +44,26 @@
     </footer>
   </div>
 
-  <div class="popup">
+  <div class="popup popup_edit-profile">
     <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
     <div class="popup__container">
       <h3 class="popup__title">Редактировать профиль</h3>
-      <form action="#" class="popup__form">
+      <form action="#" class="popup__form form_edit">
         <input type="text" class="popup__text popup__text_input-type_name" name="Имя пользователя">
         <input type="text" class="popup__text popup__text_input-type_job" name="Профессия пользователя">
         <button class="popup__button" type="submit" aria-label="Сохранить данные">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_add-card">
+    <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
+    <div class="popup__container">
+      <h3 class="popup__title">Новое место</h3>
+      <form action="#" class="popup__form form_add">
+        <input type="text" class="popup__text" placeholder="Название">
+        <input type="text" class="popup__text" placeholder="Ссылка на картинку">
+        <button class="popup__button" type="submit" aria-label="Создать карточку">Создать</button>
       </form>
     </div>
   </div>
