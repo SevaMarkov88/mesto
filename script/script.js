@@ -42,11 +42,11 @@ const initialCards = [
   },
 ];
 
-//make this wen loading page
+//make this when loading page
 
 //add initial cards
 initialCards.forEach(renderCards);
-// lfind all like buttons
+// find all like buttons & add listener
 let cardLike = Array.from(document.querySelectorAll(".element__like"));
 cardLike.forEach((img, index) => {
   img.addEventListener("click", () => {
@@ -54,6 +54,8 @@ cardLike.forEach((img, index) => {
     img.setAttribute("style", "opacity: 1");
   });
 });
+// find all trash buttons & add listener
+
 
 
 // Listeners
