@@ -55,7 +55,13 @@ cardLike.forEach((img, index) => {
   });
 });
 // find all trash buttons & add listener
-
+let trashCard = Array.from(document.querySelectorAll(".element__trash"));
+trashCard.forEach((button, index) => {
+  button.addEventListener('click', () => {
+    let cardToDelete = button.closest('.element');
+    cardToDelete.remove();
+  })
+})
 
 
 // Listeners
