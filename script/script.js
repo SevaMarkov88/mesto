@@ -1,4 +1,5 @@
 // variables
+
 // profile button edit
 const editButton = document.querySelector(".profile__button-edit");
 // popup & popup button close
@@ -14,7 +15,6 @@ const jobInput = formElement.querySelector(".popup__text_input-type_job");
 
 
 // cards array
-
 const initialCards = [
   {
     name: "Архыз",
@@ -42,14 +42,24 @@ const initialCards = [
   },
 ];
 
-// Listeners
-
-editButton.addEventListener("click", openPopup);
-popupClose.addEventListener("click", closePopup);
-formElement.addEventListener("submit", formSubmitHandler);
+//make this wen loading page
 
 //add initial cards
 initialCards.forEach(renderCards);
+// lfind all like buttons
+let cardLike = Array.from(document.querySelectorAll(".element__like"));
+cardLike.forEach((img, index) => {
+  img.addEventListener("click", () => {
+    img.classList.toggle("element__like_active");
+    img.setAttribute("style", "opacity: 1");
+  });
+});
+
+
+// Listeners
+editButton.addEventListener("click", openPopup);
+popupClose.addEventListener("click", closePopup);
+formElement.addEventListener("submit", formSubmitHandler);
 
 // functions
 
@@ -74,11 +84,12 @@ function renderCards(obj) {
   const cardTemplate = document.querySelector(".template").content;
   const cardsSection = document.querySelector(".elements");
 
-  const cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
+  const cardBlock = cardTemplate.querySelector(".element").cloneNode(true);
 
-  cardBlock.querySelector('.element__image').src = obj.link;
-  cardBlock.querySelector('.element__image').alt = obj.name;
-  cardBlock.querySelector('.element__title').textContent = obj.name
+  cardBlock.querySelector(".element__image").src = obj.link;
+  cardBlock.querySelector(".element__image").alt = obj.name;
+  cardBlock.querySelector(".element__title").textContent = obj.name;
 
   cardsSection.append(cardBlock);
 }
+
