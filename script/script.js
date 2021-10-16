@@ -7,6 +7,7 @@ const addButton = document.querySelector(".profile__button-add");
 // popups
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const popupAddCard = document.querySelector(".popup_add-card");
+const popupImage = document.querySelector(".popup_image-fullscreen");
 // profile title & subtitle
 const profileTitle = document.querySelector(".profile__title");
 const progileSubtitle = document.querySelector(".profile__subtitle");
@@ -18,6 +19,7 @@ const jobInput = formEdit.querySelector(".popup__text_input-type_job");
 const formAdd = document.querySelector(".form_add");
 const titleInput = formAdd.querySelector(".popup__text_input-type_title");
 const linkInput = formAdd.querySelector(".popup__text_input-type_link");
+
 
 // cards array
 const initialCards = [
@@ -51,6 +53,7 @@ const initialCards = [
 
 //add initial cards
 initialCards.forEach(renderCard);
+popupImageActive();
 // find all like buttons & add listener
 likeActive();
 // find all trash buttons & add listener
@@ -72,6 +75,7 @@ formEdit.addEventListener("submit", (evt) => {
 formAdd.addEventListener("submit", (evt) => {
   evt.preventDefault();
   formSubmitHandler(popupAddCard);
+  popupImageActive();
 });
 
 // functions
@@ -87,6 +91,7 @@ function openPopup(popup) {
       titleInput.value = "";
       linkInput.value = "";
       break;
+    case popupImage:
     default:
       break;
   }
@@ -132,7 +137,7 @@ function renderCard(arr) {
   cardBlock.querySelector(".element__image").alt = arr.name;
   cardBlock.querySelector(".element__title").textContent = arr.name;
 
-  cardsSection.append(cardBlock);
+  cardsSection.prepend(cardBlock);
 }
 
 function likeActive() {
@@ -153,4 +158,17 @@ trashCard.forEach((button) => {
     cardToDelete.remove();
   });
 });
+}
+
+function popupImageActive() {
+  let cardsArr = Array.from(document.querySelectorAll(".element"));
+  cardsArr.forEach((elem) => {
+    elem.addEventListener("click", () => {
+      popupImage.querySelector(".popup__image").src = elem.querySelector(".element__image").src;
+      popupImage.querySelector(".popup__image").alt = elem.querySelector(".element__image").alt;
+      popupImage.querySelector(".popup__subtitle").textContent = elem.querySelector(".element__title").textContent;
+
+      popupImage.classList.add("popup_opened");
+    })
+  })
 }
