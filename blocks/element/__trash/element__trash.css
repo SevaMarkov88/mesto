@@ -5,7 +5,6 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 18px;
   transition: opacity ease 0.5s;
   background: transparent;
   background-image: url(../../../images/trash.svg);
