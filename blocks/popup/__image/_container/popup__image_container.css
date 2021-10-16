@@ -1,0 +1,10 @@
+.popup__image_container {
+   max-width: calc(75vw + 64px);
+   display: grid;
+}
+
+@media (max-width: 550px) {
+   .popup__image_container {
+     width: 75vw;
+   }
+ }

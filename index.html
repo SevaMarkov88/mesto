@@ -45,7 +45,8 @@
    </div>
 
    <div class="popup popup_edit-profile">
-      <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
+      <div class="popup__main-container">
+         <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
       <div class="popup__container">
          <h3 class="popup__title">Редактировать профиль</h3>
          <form action="#" class="popup__form form_edit">
@@ -54,24 +55,29 @@
             <button class="popup__button" type="submit" aria-label="Сохранить данные">Сохранить</button>
          </form>
       </div>
+      </div>
    </div>
 
    <div class="popup popup_add-card">
-      <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
-      <div class="popup__container">
-         <h3 class="popup__title">Новое место</h3>
-         <form action="#" class="popup__form form_add">
-            <input type="text" class="popup__text popup__text_input-type_title" placeholder="Название" autofocus>
-            <input type="text" class="popup__text popup__text_input-type_link" placeholder="Ссылка на картинку">
-            <button class="popup__button" type="submit" aria-label="Создать карточку">Создать</button>
-         </form>
+      <div class="popup__main-container">
+         <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
+         <div class="popup__container">
+            <h3 class="popup__title">Новое место</h3>
+            <form action="#" class="popup__form form_add">
+               <input type="text" class="popup__text popup__text_input-type_title" placeholder="Название" autofocus>
+               <input type="text" class="popup__text popup__text_input-type_link" placeholder="Ссылка на картинку">
+               <button class="popup__button" type="submit" aria-label="Создать карточку">Создать</button>
+            </form>
+         </div>
       </div>
    </div>
 
    <div class="popup popup_image-fullscreen">
-      <button class="popup__close" type="button" aria-label="Закрыть окно"></button>
-      <img src="" alt="" class="popup__image">
-      <h3 class="popup__subtitle"></h3>
+      <div class="popup__image_container">
+         <button class="popup__close popup__image_close-btn" type="button" aria-label="Закрыть окно"></button>
+         <img src="" alt="" class="popup__image">
+         <h3 class="popup__subtitle"></h3>
+      </div>
    </div>
 
    <template class="template">

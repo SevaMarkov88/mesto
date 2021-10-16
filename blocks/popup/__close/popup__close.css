@@ -1,5 +1,5 @@
 .popup__close {
-  margin: 0 0 8px 473px;
+  margin: 0 0 8px 0;
   width: 32px;
   height: 32px;
   border: none;
@@ -7,6 +7,8 @@
   background-image: url(../../../images/Close-Icon.svg);
   background-position: center;
   background-repeat: no-repeat;
+  background-size: contain;
+  justify-self: end;
 }
 
 .popup__close:hover {
@@ -15,7 +17,7 @@
 
 @media (max-width: 550px) {
   .popup__close {
-    margin: 0 0 16px 260px;
+    margin: 0 0 16px 0;
     width: 20px;
     height: 20px;
   }
