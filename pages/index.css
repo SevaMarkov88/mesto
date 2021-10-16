@@ -54,7 +54,7 @@
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__subtitle/popup__subtitle.css);
-@import url(../blocks/popup/__image/_container/popup__image_container.css);
+@import url(../blocks/popup/__image/_container/popup__main_container.css);
 @import url(../blocks/popup/__main-container/popup__main-container.css);
-@import url(../blocks/popup/__image/_close-btn/popup__image_close-btn.css);
+@import url(../blocks/popup/__close-btn/popup__close-btn.css);
 

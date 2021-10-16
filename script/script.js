@@ -12,11 +12,11 @@ const popupImage = document.querySelector('.popup_image-fullscreen');
 const profileTitle = document.querySelector('.profile__title');
 const progileSubtitle = document.querySelector('.profile__subtitle');
 // popup edit profile form & bouth input
-const formEdit = document.querySelector('.form_edit');
+const formEdit = document.querySelector('.form__edit');
 const nameInput = formEdit.querySelector('.popup__text_input-type_name');
 const jobInput = formEdit.querySelector('.popup__text_input-type_job');
 // popup add card form & both inputs
-const formAdd = document.querySelector('.form_add');
+const formAdd = document.querySelector('.form__add');
 const titleInput = formAdd.querySelector('.popup__text_input-type_title');
 const linkInput = formAdd.querySelector('.popup__text_input-type_link');
 
