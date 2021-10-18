@@ -22,6 +22,8 @@ const linkInput = formAdd.querySelector('.popup__text_input-type_link');
 // popup image & title
 const popupImagePicture = popupImage.querySelector('.popup__image');
 const popupImageTitle = popupImage.querySelector('.popup__subtitle');
+// cards block '.elements'
+const cardsSection = document.querySelector('.elements');
 
 // cards array
 const initialCards = [
@@ -108,25 +110,8 @@ function closePopup(popup) {
 }
 
 function renderCard(arr) {
-  const cardsSection = document.querySelector('.elements');
   const cardElement = createCard(arr);
-
   cardsSection.prepend(cardElement);
-
-  cardElement.querySelector('.element__like').addEventListener('click', (evt) => {
-      evt.target.classList.toggle('element__like_active');
-    });
-
-  cardElement.querySelector('.element__trash').addEventListener('click', (evt) => {
-      evt.target.closest('.element').remove();
-    });
-
-  cardElement.querySelector('.element__image').addEventListener('click', () => {
-    popupImagePicture.src = arr.link;
-    popupImagePicture.alt = arr.name;
-    popupImageTitle.textContent = arr.name;
-    openPopup(popupImage);
-  });
 }
 
 function createCard(arr) {
@@ -136,6 +121,21 @@ function createCard(arr) {
   cardBlock.querySelector('.element__image').src = arr.link;
   cardBlock.querySelector('.element__image').alt = arr.name;
   cardBlock.querySelector('.element__title').textContent = arr.name;
+
+  cardBlock.querySelector('.element__like').addEventListener('click', (evt) => {
+    evt.target.classList.toggle('element__like_active');
+  });
+
+  cardBlock.querySelector('.element__trash').addEventListener('click', (evt) => {
+    evt.target.closest('.element').remove();
+  });
+
+  cardBlock.querySelector('.element__image').addEventListener('click', () => {
+  popupImagePicture.src = arr.link;
+  popupImagePicture.alt = arr.name;
+  popupImageTitle.textContent = arr.name;
+  openPopup(popupImage);
+  });
 
   return cardBlock;
 }
