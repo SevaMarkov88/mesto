@@ -26,6 +26,9 @@ const popupImageTitle = popupImage.querySelector('.popup__subtitle');
 const cardsSection = document.querySelector('.elements');
 
 // cards array
+/**
+ * Array of card, consist of objects with card title and card image link
+ */
 const initialCards = [
   {
     name: 'Архыз',
@@ -61,25 +64,49 @@ initialCards.forEach(renderCard);
 closePopupActive();
 
 // Listeners
+/**
+ * Place profile title and subtitle from page to input field whet opening popupEditProfile
+ * active by clicking editButton
+ */
 editButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = progileSubtitle.textContent;
   openPopup(popupEditProfile);
 });
+/**
+ * Clear input field in popupAddCard whep opening it
+ * active by clicking addButton
+ */
 addButton.addEventListener('click', () => {
   titleInput.value = '';
   linkInput.value = '';
   openPopup(popupAddCard);
 });
+/**
+ * Start function handleEditProfile
+ * active by clicking submit button in popupEditProfile
+ */
 formEdit.addEventListener('submit', handleEditProfile);
+/**
+ * Start function handleAddCard
+ * active by clicking submit button in popupAddCard
+ */
 formAdd.addEventListener('submit', handleAddCard);
 
 // functions
 
+/**
+ * Opening popup window by adding new class to popup block
+ * @param {Element} popup what you want to open
+ */
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
+/**
+ * Closing popupEditProfile by pressing submit button
+ * @param {*} evt standart event what must to be stopped
+ */
 function handleEditProfile(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
@@ -87,6 +114,10 @@ function handleEditProfile(evt) {
   closePopup(popupEditProfile);
 }
 
+/**
+ * Closing popupAddCard by pressing submit button and add new card in initialCards array
+ * @param {*} evt
+ */
 function handleAddCard(evt) {
   evt.preventDefault();
   const newArray = { name: titleInput.value, link: linkInput.value };
@@ -95,6 +126,9 @@ function handleAddCard(evt) {
   closePopup(popupAddCard);
 }
 
+/**
+ * Finding all popup close buttons and make them active to use
+ */
 function closePopupActive() {
   const closePopupList = Array.from(document.querySelectorAll('.popup__close'));
   closePopupList.forEach((button) => {
@@ -105,15 +139,28 @@ function closePopupActive() {
   });
 }
 
+/**
+ * Closing popup window
+ * @param {element} popup window what you want to close
+ */
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
+/**
+ * Render card block on page
+ * @param {Obj} arr
+ */
 function renderCard(arr) {
   const cardElement = createCard(arr);
   cardsSection.prepend(cardElement);
 }
 
+/**
+ * Create card block and make buttons trash & like active and put card info in popupImage
+ * @param {Obj} arr take info from initialCards array
+ * @returns {Element} new cardBlock what ready to render
+ */
 function createCard(arr) {
   const cardTemplate = document.querySelector('.template').content;
   const cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
