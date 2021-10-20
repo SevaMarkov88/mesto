@@ -10,8 +10,8 @@ const popupAddCard = document.querySelector('.popup_add-card');
 const popupImage = document.querySelector('.popup_image-fullscreen');
 // profile title & subtitle
 const profileTitle = document.querySelector('.profile__title');
-const progileSubtitle = document.querySelector('.profile__subtitle');
-// popup edit profile form & bouth input
+const profileSubtitle = document.querySelector('.profile__subtitle');
+// popup edit profile form & both input
 const formEdit = document.querySelector('.form-edit');
 const nameInput = formEdit.querySelector('.popup__text_input-type_name');
 const jobInput = formEdit.querySelector('.popup__text_input-type_job');
@@ -58,7 +58,7 @@ const initialCards = [
 
 //make this when loading page
 
-//add initial cards
+//add initial cards on page
 initialCards.forEach(renderCard);
 // find all popup close buttons
 closePopupActive();
@@ -70,11 +70,11 @@ closePopupActive();
  */
 editButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
-  jobInput.value = progileSubtitle.textContent;
+  jobInput.value = profileSubtitle.textContent;
   openPopup(popupEditProfile);
 });
 /**
- * Clear input field in popupAddCard whep opening it
+ * Clear input field in popupAddCard when opening it
  * active by clicking addButton
  */
 addButton.addEventListener('click', () => {
@@ -105,12 +105,12 @@ function openPopup(popup) {
 
 /**
  * Closing popupEditProfile by pressing submit button
- * @param {*} evt standart event what must to be stopped
+ * @param {*} evt standard event what must to be stopped
  */
 function handleEditProfile(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
-  progileSubtitle.textContent = jobInput.value;
+  profileSubtitle.textContent = jobInput.value;
   closePopup(popupEditProfile);
 }
 
@@ -149,25 +149,25 @@ function closePopup(popup) {
 
 /**
  * Render card block on page
- * @param {Obj} arr
+ * @param {Object} obj object with card title and img link what need to render
  */
-function renderCard(arr) {
-  const cardElement = createCard(arr);
+function renderCard(obj) {
+  const cardElement = createCard(obj);
   cardsSection.prepend(cardElement);
 }
 
 /**
  * Create card block and make buttons trash & like active and put card info in popupImage
- * @param {Obj} arr take info from initialCards array
+ * @param {Object} obj take info from initialCards array
  * @returns {Element} new cardBlock what ready to render
  */
-function createCard(arr) {
+function createCard(obj) {
   const cardTemplate = document.querySelector('.template').content;
   const cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
 
-  cardBlock.querySelector('.element__image').src = arr.link;
-  cardBlock.querySelector('.element__image').alt = arr.name;
-  cardBlock.querySelector('.element__title').textContent = arr.name;
+  cardBlock.querySelector('.element__image').src = obj.link;
+  cardBlock.querySelector('.element__image').alt = obj.name;
+  cardBlock.querySelector('.element__title').textContent = obj.name;
 
   cardBlock.querySelector('.element__like').addEventListener('click', (evt) => {
     evt.target.classList.toggle('element__like_active');
@@ -178,9 +178,9 @@ function createCard(arr) {
   });
 
   cardBlock.querySelector('.element__image').addEventListener('click', () => {
-  popupImagePicture.src = arr.link;
-  popupImagePicture.alt = arr.name;
-  popupImageTitle.textContent = arr.name;
+  popupImagePicture.src = obj.link;
+  popupImagePicture.alt = obj.name;
+  popupImageTitle.textContent = obj.name;
   openPopup(popupImage);
   });
 
