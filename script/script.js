@@ -197,6 +197,10 @@ function createCard(obj) {
   return cardBlock;
 }
 
+/**
+ * activate closing popup window by click overlay or press "ESC"
+ * @param {element} popup popup window to close
+ */
 function addCloseListeners (popup) {
   popup.addEventListener('click', (evt) => {
     if (evt.target === popup){
