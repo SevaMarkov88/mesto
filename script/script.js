@@ -15,10 +15,13 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 const formEdit = document.querySelector('.form-edit');
 const nameInput = formEdit.querySelector('.popup__text_input-type_name');
 const jobInput = formEdit.querySelector('.popup__text_input-type_job');
+const editSubmitButton = formEdit.querySelector('.popup__button');
 // popup add card form & both inputs
 const formAdd = document.querySelector('.form-add');
 const titleInput = formAdd.querySelector('.popup__text_input-type_title');
 const linkInput = formAdd.querySelector('.popup__text_input-type_link');
+
+
 // popup image & title
 const popupImagePicture = popupImage.querySelector('.popup__image');
 const popupImageTitle = popupImage.querySelector('.popup__subtitle');
@@ -72,6 +75,9 @@ editButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
   openPopup(popupEditProfile);
+  setEventListeners(popupEditProfile);
+  editSubmitButton.classList.add('popup__button_inactive');
+  editSubmitButton.disabled = true;
 });
 /**
  * Clear input field in popupAddCard when opening it
@@ -81,6 +87,7 @@ addButton.addEventListener('click', () => {
   titleInput.value = '';
   linkInput.value = '';
   openPopup(popupAddCard);
+  setEventListeners(popupAddCard);
 });
 /**
  * Start function handleEditProfile
@@ -120,7 +127,7 @@ function handleEditProfile(evt) {
  */
 function handleAddCard(evt) {
   evt.preventDefault();
-  const newArray = { name: titleInput.value, link: linkInput.value };
+  const newArray = {name: titleInput.value, link: linkInput.value};
   initialCards.push(newArray);
   renderCard(newArray);
   closePopup(popupAddCard);
@@ -178,12 +185,64 @@ function createCard(obj) {
   });
 
   cardBlock.querySelector('.element__image').addEventListener('click', () => {
-  popupImagePicture.src = obj.link;
-  popupImagePicture.alt = obj.name;
-  popupImageTitle.textContent = obj.name;
-  openPopup(popupImage);
+    popupImagePicture.src = obj.link;
+    popupImagePicture.alt = obj.name;
+    popupImageTitle.textContent = obj.name;
+    openPopup(popupImage);
   });
 
   return cardBlock;
 }
+
+//form validation functions
+
+function showInputError(formElement, inputElement, errorMessage) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('popup__text_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('popup__span-error_active');
+}
+
+function hideInputError(formElement, inputElement) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('popup__text_error');
+  errorElement.textContent = '';
+  errorElement.classList.remove('popup__span-error_active');
+}
+
+function setEventListeners(formElement) {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__text'));
+  const buttonElement = formElement.querySelector('.popup__button');
+  toggleButtonState(inputList, buttonElement);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+}
+
+function toggleButtonState(inputList, buttonElement) {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('popup__button_inactive');
+  } else {
+    buttonElement.classList.remove('popup__button_inactive');
+  }
+
+}
+
+function hasInvalidInput(inputList) {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
+
+function checkInputValidity(formElement, inputElement) {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+}
+
 

@@ -11,10 +11,6 @@
   line-height: 17px;
 }
 
-.popup__text:nth-child(2n) {
-  margin-bottom: 45px;
-}
-
 @media (max-width: 550px) {
   .popup__text {
     width: 238px;
