@@ -76,6 +76,7 @@ editButton.addEventListener('click', () => {
   jobInput.value = profileSubtitle.textContent;
   openPopup(popupEditProfile);
   setEventListeners(popupEditProfile);
+  addCloseListeners(popupEditProfile);
   editSubmitButton.classList.add('popup__button_inactive');
   editSubmitButton.disabled = true;
 });
@@ -87,6 +88,7 @@ addButton.addEventListener('click', () => {
   titleInput.value = '';
   linkInput.value = '';
   openPopup(popupAddCard);
+  addCloseListeners(popupAddCard);
   setEventListeners(popupAddCard);
 });
 /**
@@ -189,60 +191,26 @@ function createCard(obj) {
     popupImagePicture.alt = obj.name;
     popupImageTitle.textContent = obj.name;
     openPopup(popupImage);
+    addCloseListeners(popupImage);
   });
 
   return cardBlock;
 }
 
-//form validation functions
-
-function showInputError(formElement, inputElement, errorMessage) {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__text_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__span-error_active');
-}
-
-function hideInputError(formElement, inputElement) {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__text_error');
-  errorElement.textContent = '';
-  errorElement.classList.remove('popup__span-error_active');
-}
-
-function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__text'));
-  const buttonElement = formElement.querySelector('.popup__button');
-  toggleButtonState(inputList, buttonElement);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
+function addCloseListeners (popup) {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target === popup){
+    closePopup(popup);
+    }
+    console.log(evt.target);
+  });
+  document.addEventListener('keydown', (evt) => {
+    const key = evt.key;
+    if (key === 'Escape') {
+      closePopup(popup)
+    }
   });
 }
 
-function toggleButtonState(inputList, buttonElement) {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__button_inactive');
-  } else {
-    buttonElement.classList.remove('popup__button_inactive');
-  }
-
-}
-
-function hasInvalidInput(inputList) {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-}
-
-function checkInputValidity(formElement, inputElement) {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-}
 
 

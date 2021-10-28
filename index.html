@@ -68,8 +68,12 @@
     <div class="popup__container">
       <h3 class="popup__title">Новое место</h3>
       <form action="#" class="popup__form form-add" novalidate>
-        <input type="text" class="popup__text popup__text_input-type_title" placeholder="Название" autofocus>
-        <input type="text" class="popup__text popup__text_input-type_link" placeholder="Ссылка на картинку">
+        <input type="text" id="input-title" class="popup__text popup__text_input-type_title" placeholder="Название"
+               autofocus minlength="2" maxlength="30" required>
+        <span class="input-title-error popup__span-error"></span>
+        <input type="url" id="input-link" class="popup__text popup__text_input-type_link"
+               placeholder="Ссылка на картинку" required>
+        <span class="input-link-error popup__span-error"></span>
         <button class="popup__button" type="submit" aria-label="Создать карточку">Создать</button>
       </form>
     </div>
@@ -95,6 +99,7 @@
   </article>
 </template>
 
+<script src="script/validate.js"></script>
 <script src="script/script.js"></script>
 
 </body>
