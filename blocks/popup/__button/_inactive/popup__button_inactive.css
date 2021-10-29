@@ -4,3 +4,8 @@
   background: #ffffff;
   opacity: 0.15;
 }
+
+.popup__button_inactive:hover {
+  opacity: 0.15;
+}
+
