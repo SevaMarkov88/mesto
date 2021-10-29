@@ -14,8 +14,6 @@ validateElementsList.formElementList.forEach((formElement) => {
 
 function enableValidation() {
   validateElementsList.formElementList = Array.from(document.querySelectorAll('.popup__form'));
-  validateElementsList.inputElementList = Array.from(document.querySelectorAll('.popup__text'));
-  validateElementsList.buttonElementList = Array.from(document.querySelectorAll('.popup__button'));
 }
 /**
  * show mistakes in input fields
@@ -66,8 +64,10 @@ function setEventListeners(formElement) {
 function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add('popup__button_inactive');
+    buttonElement.disabled = true;
   } else {
     buttonElement.classList.remove('popup__button_inactive');
+    buttonElement.disabled = false;
   }
 
 }
