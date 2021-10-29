@@ -1,9 +1,6 @@
 //variables
 const validateElementsList = {
-  formElementList: '',
-  inputElementList: '',
-  buttonElementList: '',
-
+  formElementList: ''
 };
 
 //active when load page
