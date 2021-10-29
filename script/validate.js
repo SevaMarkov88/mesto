@@ -1,5 +1,25 @@
-//form validation functions
+//variables
+const validateElementsList = {
+  formElementList: '',
+  inputElementList: '',
+  buttonElementList: '',
 
+};
+
+//active when load page
+enableValidation();
+
+//listeners
+validateElementsList.formElementList.forEach((formElement) => {
+  setEventListeners(formElement);
+})
+//functions
+
+function enableValidation() {
+  validateElementsList.formElementList = Array.from(document.querySelectorAll('.popup__form'));
+  validateElementsList.inputElementList = Array.from(document.querySelectorAll('.popup__text'));
+  validateElementsList.buttonElementList = Array.from(document.querySelectorAll('.popup__button'));
+}
 /**
  * show mistakes in input fields
  * @param {element} formElement form block with inputs
