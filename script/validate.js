@@ -11,7 +11,9 @@ validateElementsList.formElementList.forEach((formElement) => {
   setEventListeners(formElement);
 })
 //functions
-
+/**
+ * add array of all form elements to validateElementList
+ */
 function enableValidation() {
   validateElementsList.formElementList = Array.from(document.querySelectorAll('.popup__form'));
 }
