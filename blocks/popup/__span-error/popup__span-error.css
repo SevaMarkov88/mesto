@@ -6,6 +6,7 @@
   margin: -12px 0 -5px;
   justify-self: baseline;
   width: 362px;
+  z-index: 1;
 }
 
 @media (max-width: 550px) {
