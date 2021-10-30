@@ -24,6 +24,8 @@ const popupImagePicture = popupImage.querySelector('.popup__image');
 const popupImageTitle = popupImage.querySelector('.popup__subtitle');
 // cards block '.elements'
 const cardsSection = document.querySelector('.elements');
+// popup closing buttons array
+const popupsList = Array.from(document.querySelectorAll('.popup'));
 
 // cards array
 /**
@@ -56,13 +58,6 @@ const initialCards = [
   },
 ];
 
-//make this when loading page
-
-//add initial cards on page
-initialCards.forEach(renderCard);
-// find all popup close buttons
-closePopupActive();
-
 // Listeners
 /**
  * Place profile title and subtitle from page to input field whet opening popupEditProfile
@@ -78,8 +73,7 @@ editButton.addEventListener('click', () => {
  * active by clicking addButton
  */
 addButton.addEventListener('click', () => {
-  titleInput.value = '';
-  linkInput.value = '';
+  formAdd.reset();
   openPopup(popupAddCard);
 });
 /**
@@ -93,6 +87,23 @@ formEdit.addEventListener('submit', handleEditProfile);
  */
 formAdd.addEventListener('submit', handleAddCard);
 
+/**
+ * add event listeners to all popup closing buttons and overlay click
+ */
+popupsList.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target === popup || evt.target.classList.contains('popup__close')){
+      closePopup(popup);
+    }
+  });
+  document.addEventListener('keydown', (evt) => {
+    const key = evt.key;
+    if (key === 'Escape') {
+    closePopup(popup);
+  }
+});
+});
+
 // functions
 
 /**
@@ -101,7 +112,6 @@ formAdd.addEventListener('submit', handleAddCard);
  */
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  addCloseListeners(popup);
 }
 
 /**
@@ -125,19 +135,6 @@ function handleAddCard(evt) {
   initialCards.push(newArray);
   renderCard(newArray);
   closePopup(popupAddCard);
-}
-
-/**
- * Finding all popup close buttons and make them active to use
- */
-function closePopupActive() {
-  const closePopupList = Array.from(document.querySelectorAll('.popup__close'));
-  closePopupList.forEach((button) => {
-    button.addEventListener('click', () => {
-      const popup = button.closest('.popup');
-      popup.classList.remove('popup_opened');
-    });
-  });
 }
 
 /**
@@ -189,24 +186,10 @@ function createCard(obj) {
   return cardBlock;
 }
 
-/**
- * activate closing popup window by click overlay or press "ESC"
- * @param {element} popup popup window to close
- */
-function addCloseListeners (popup) {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target === popup){
-    closePopup(popup);
-    }
-    console.log(evt.target);
-  });
-  document.addEventListener('keydown', (evt) => {
-    const key = evt.key;
-    if (key === 'Escape') {
-      closePopup(popup)
-    }
-  });
-}
+//make this when loading page
+
+//add initial cards on page
+initialCards.forEach(renderCard);
 
 
 
