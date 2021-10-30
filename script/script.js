@@ -75,6 +75,7 @@ editButton.addEventListener('click', () => {
 addButton.addEventListener('click', () => {
   formAdd.reset();
   openPopup(popupAddCard);
+  toggleSubmitButton(formAdd, formAdd.querySelector('.popup__button'));
 });
 /**
  * Start function handleEditProfile
