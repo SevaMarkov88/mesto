@@ -10,7 +10,7 @@
   color: #ffffff;
   padding: 0;
   margin: 35px 0 20px;
-  transition: opacity ease 0.5s;
+  transition: all ease 0.5s;
 }
 
 .popup__button:hover {

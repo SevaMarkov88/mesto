@@ -51,10 +51,10 @@
       <h3 class="popup__title">Редактировать профиль</h3>
       <form action="#" class="popup__form form-edit" novalidate>
         <input type="text" id="input-name" class="popup__text popup__text_input-type_name" placeholder="Имя"
-               minlength="2" maxlength="40" required>
+               minlength="2" maxlength="40" required autofocus autocomplete="off">
         <span class="input-name-error popup__span-error"></span>
         <input type="text" id="input-job" class="popup__text popup__text_input-type_job" placeholder="О себе"
-               minlength="2" maxlength="200" required>
+               minlength="2" maxlength="200" required autocomplete="off">
         <span class="input-job-error popup__span-error"></span>
         <button class="popup__button" type="submit" aria-label="Сохранить данные">Сохранить</button>
       </form>
@@ -69,10 +69,10 @@
       <h3 class="popup__title">Новое место</h3>
       <form action="#" class="popup__form form-add" novalidate>
         <input type="text" id="input-title" class="popup__text popup__text_input-type_title" placeholder="Название"
-               autofocus minlength="2" maxlength="30" required>
+               autofocus minlength="2" maxlength="30" required autocomplete="off">
         <span class="input-title-error popup__span-error"></span>
         <input type="url" id="input-link" class="popup__text popup__text_input-type_link"
-               placeholder="Ссылка на картинку" required>
+               placeholder="Ссылка на картинку" required autocomplete="off">
         <span class="input-link-error popup__span-error"></span>
         <button class="popup__button" type="submit" aria-label="Создать карточку">Создать</button>
       </form>
