@@ -26,6 +26,7 @@ function enableValidation() {
 function showInputError(formElement, inputElement, errorMessage) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add('popup__text_error');
+  errorMessage = errorMessage.split('.')[0];
   errorElement.textContent = errorMessage;
   errorElement.classList.add('popup__span-error_active');
 }
