@@ -49,9 +49,8 @@ function checkInputValidity (form, input) {
  */
 function showErrorMassage(form, input) {
   const errorElement = form.querySelector(`.${input.id}-error`);
-  let errorMassage = input.validationMessage;
+  const errorMassage = input.validationMessage.split('.')[0];
   input.classList.add(config.inputErrorClass);
-  errorMassage = errorMassage.split('.')[0];
   errorElement.textContent = errorMassage;
   errorElement.classList.add(config.errorClass);
 }

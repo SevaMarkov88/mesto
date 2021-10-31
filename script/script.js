@@ -98,13 +98,6 @@ popupsList.forEach((popup) => {
       deleteErrorMessage(popup.querySelector('.popup__form'));
     }
   });
-  document.addEventListener('keydown', (evt) => {
-    const key = evt.key;
-    if (key === 'Escape') {
-    closePopup(popup);
-    deleteErrorMessage(popup.querySelector('.popup__form'));
-  }
-});
 });
 
 // functions
@@ -115,6 +108,7 @@ popupsList.forEach((popup) => {
  */
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', (evt) => {popupEscClose(evt,popup)});
 }
 
 /**
@@ -187,6 +181,19 @@ function createCard(obj) {
   });
 
   return cardBlock;
+}
+
+/**
+ * closing popup by pressing "ESC"
+ * @param evt
+ * @param {element} popup popup window to close
+ */
+function popupEscClose (evt, popup) {
+  const key = evt.key;
+  if (key === 'Escape') {
+    closePopup(popup);
+    deleteErrorMessage(popup.querySelector('.popup__form'));
+  }
 }
 
 //make this when loading page
