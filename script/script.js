@@ -108,7 +108,7 @@ popupsList.forEach((popup) => {
  */
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', (evt) => {popupEscClose(evt,popup)});
+  document.addEventListener('keydown', (evt) => {popupEscClose(evt, popup)});
 }
 
 /**
@@ -140,6 +140,7 @@ function handleAddCard(evt) {
  */
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', (evt) => {popupEscClose(evt, popup)});
 }
 
 /**
