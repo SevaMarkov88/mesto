@@ -1,3 +1,8 @@
+//import
+
+import Card from './Card.js';
+import FormValidator from "./FormValidator.js";
+
 // variables
 
 // profile button edit
@@ -19,13 +24,21 @@ const jobInput = formEdit.querySelector('.popup__text_input-type_job');
 const formAdd = document.querySelector('.form-add');
 const titleInput = formAdd.querySelector('.popup__text_input-type_title');
 const linkInput = formAdd.querySelector('.popup__text_input-type_link');
-// popup image & title
-const popupImagePicture = popupImage.querySelector('.popup__image');
-const popupImageTitle = popupImage.querySelector('.popup__subtitle');
-// cards block '.elements'
-const cardsSection = document.querySelector('.elements');
+// cards block
+const cardTemplate = document.querySelector('.template').content;
 // popup closing buttons array
 const popupsList = Array.from(document.querySelectorAll('.popup'));
+//validation config
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__text',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_inactive',
+  inputErrorClass: 'popup__text_error',
+  errorClass: 'popup__span-error_active',
+  popupClass: 'popup',
+  openedPopupClass: 'popup_opened'
+};
 
 // cards array
 /**
@@ -67,6 +80,8 @@ editButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
   openPopup(popupEditProfile);
+  const popupFormValidation = new FormValidator(config, formEdit);
+  popupFormValidation.enableValidation();
 });
 /**
  * Clear input field in popupAddCard when opening it
@@ -75,7 +90,8 @@ editButton.addEventListener('click', () => {
 addButton.addEventListener('click', () => {
   formAdd.reset();
   openPopup(popupAddCard);
-  toggleSubmitButton(formAdd, formAdd.querySelector('.popup__button'));
+  const popupFormValidation = new FormValidator(config, formAdd);
+  popupFormValidation.enableValidation();
 });
 /**
  * Start function handleEditProfile
@@ -95,7 +111,6 @@ popupsList.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
     if (evt.target === popup || evt.target.classList.contains('popup__close')){
       closePopup(popup);
-      deleteErrorMessage(popup.querySelector('.popup__form'));
     }
   });
 });
@@ -104,7 +119,7 @@ popupsList.forEach((popup) => {
 
 /**
  * Opening popup window by adding new class to popup block
- * @param {Element} popup what you want to open
+ * @param {Object} popup what you want to open
  */
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -130,77 +145,45 @@ function handleAddCard(evt) {
   evt.preventDefault();
   const newArray = {name: titleInput.value, link: linkInput.value};
   initialCards.push(newArray);
-  renderCard(newArray);
+  const card = new Card(newArray.name, newArray.link, cardTemplate);
+  card.renderCard();
   closePopup(popupAddCard);
 }
 
 /**
  * Closing popup window
- * @param {element} popup window what you want to close
+ * @param {Object} popup window what you want to close
  */
 function closePopup(popup) {
+  const closestForm = popup.querySelector('.popup__form');
+  const errorMessage = new FormValidator(config, closestForm);
+  errorMessage.deleteErrorMessage();
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', (evt) => {popupEscClose(evt, popup)});
 }
 
 /**
- * Render card block on page
- * @param {Object} obj object with card title and img link what need to render
- */
-function renderCard(obj) {
-  const cardElement = createCard(obj);
-  cardsSection.prepend(cardElement);
-}
-
-/**
- * Create card block and make buttons trash & like active and put card info in popupImage
- * @param {Object} obj take info from initialCards array
- * @returns {Element} new cardBlock what ready to render
- */
-function createCard(obj) {
-  const cardTemplate = document.querySelector('.template').content;
-  const cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
-
-  cardBlock.querySelector('.element__image').src = obj.link;
-  cardBlock.querySelector('.element__image').alt = obj.name;
-  cardBlock.querySelector('.element__title').textContent = obj.name;
-
-  cardBlock.querySelector('.element__like').addEventListener('click', (evt) => {
-    evt.target.classList.toggle('element__like_active');
-  });
-
-  cardBlock.querySelector('.element__trash').addEventListener('click', (evt) => {
-    evt.target.closest('.element').remove();
-  });
-
-  cardBlock.querySelector('.element__image').addEventListener('click', () => {
-    popupImagePicture.src = obj.link;
-    popupImagePicture.alt = obj.name;
-    popupImageTitle.textContent = obj.name;
-    openPopup(popupImage);
-    addCloseListeners(popupImage);
-  });
-
-  return cardBlock;
-}
-
-/**
  * closing popup by pressing "ESC"
  * @param evt
- * @param {element} popup popup window to close
+ * @param {Object} popup popup window to close
  */
 function popupEscClose (evt, popup) {
   const key = evt.key;
   if (key === 'Escape') {
     closePopup(popup);
-    deleteErrorMessage(popup.querySelector('.popup__form'));
   }
 }
 
 //make this when loading page
 
 //add initial cards on page
-initialCards.forEach(renderCard);
+initialCards.forEach((item) => {
+  let card = new Card(item.name, item.link, cardTemplate);
+  card.renderCard();
+})
 
 
+//export
+
+export {openPopup, popupImage}
 
