@@ -2,6 +2,7 @@
 
 import Card from './Card.js';
 import FormValidator from "./FormValidator.js";
+import {config} from "./initialCardsArr.js";
 
 // variables
 
@@ -28,17 +29,6 @@ const linkInput = formAdd.querySelector('.popup__text_input-type_link');
 const cardTemplate = document.querySelector('.template').content;
 // popup closing buttons array
 const popupsList = Array.from(document.querySelectorAll('.popup'));
-//validation config
-const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__text',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_inactive',
-  inputErrorClass: 'popup__text_error',
-  errorClass: 'popup__span-error_active',
-  popupClass: 'popup',
-  openedPopupClass: 'popup_opened'
-};
 
 // cards array
 /**
@@ -80,8 +70,7 @@ editButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
   openPopup(popupEditProfile);
-  const popupFormValidation = new FormValidator(config, formEdit);
-  popupFormValidation.enableValidation();
+  popupEditValidation.deleteErrorMessage();
 });
 /**
  * Clear input field in popupAddCard when opening it
@@ -90,8 +79,7 @@ editButton.addEventListener('click', () => {
 addButton.addEventListener('click', () => {
   formAdd.reset();
   openPopup(popupAddCard);
-  const popupFormValidation = new FormValidator(config, formAdd);
-  popupFormValidation.enableValidation();
+  popupAddValidation.deleteErrorMessage();
 });
 /**
  * Start function handleEditProfile
@@ -123,7 +111,7 @@ popupsList.forEach((popup) => {
  */
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', (evt) => {popupEscClose(evt, popup)});
+  document.addEventListener('keydown', popupEscClose);
 }
 
 /**
@@ -155,11 +143,8 @@ function handleAddCard(evt) {
  * @param {Object} popup window what you want to close
  */
 function closePopup(popup) {
-  const closestForm = popup.querySelector('.popup__form');
-  const errorMessage = new FormValidator(config, closestForm);
-  errorMessage.deleteErrorMessage();
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', (evt) => {popupEscClose(evt, popup)});
+  document.removeEventListener('keydown', popupEscClose);
 }
 
 /**
@@ -167,8 +152,9 @@ function closePopup(popup) {
  * @param evt
  * @param {Object} popup popup window to close
  */
-function popupEscClose (evt, popup) {
+function popupEscClose (evt) {
   const key = evt.key;
+  const popup = document.querySelector('.popup_opened')
   if (key === 'Escape') {
     closePopup(popup);
   }
@@ -178,10 +164,14 @@ function popupEscClose (evt, popup) {
 
 //add initial cards on page
 initialCards.forEach((item) => {
-  let card = new Card(item.name, item.link, cardTemplate);
+  const card = new Card(item.name, item.link, cardTemplate);
   card.renderCard();
 })
 
+const popupEditValidation = new FormValidator(config, formEdit);
+popupEditValidation.enableValidation();
+const popupAddValidation = new FormValidator(config, formAdd);
+popupAddValidation.enableValidation();
 
 //export
 
