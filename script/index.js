@@ -2,7 +2,8 @@
 
 import Card from './Card.js';
 import FormValidator from "./FormValidator.js";
-import {config} from "./initialCardsArr.js";
+import {config} from "./configValidation.js";
+import {initialCards} from "./initialCardsArr.js";
 
 // variables
 
@@ -30,36 +31,6 @@ const cardTemplate = document.querySelector('.template').content;
 // popup closing buttons array
 const popupsList = Array.from(document.querySelectorAll('.popup'));
 
-// cards array
-/**
- * Array of card, consist of objects with card title and card image link
- */
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-  },
-];
 
 // Listeners
 /**
@@ -150,7 +121,6 @@ function closePopup(popup) {
 /**
  * closing popup by pressing "ESC"
  * @param evt
- * @param {Object} popup popup window to close
  */
 function popupEscClose (evt) {
   const key = evt.key;
