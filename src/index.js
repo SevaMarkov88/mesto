@@ -2,6 +2,7 @@
 
 import Card from './Card.js';
 import FormValidator from "./FormValidator.js";
+import Popup from "./Popup.js";
 import {config} from "./configValidation.js";
 import {initialCards} from "./initialCardsArr.js";
 import './index.css';
@@ -78,15 +79,6 @@ popupsList.forEach((popup) => {
 // functions
 
 /**
- * Opening popup window by adding new class to popup block
- * @param {Object} popup what you want to open
- */
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', popupEscClose);
-}
-
-/**
  * Closing popupEditProfile by pressing submit button
  * @param {*} evt standard event what must to be stopped
  */
@@ -110,26 +102,6 @@ function handleAddCard(evt) {
   closePopup(popupAddCard);
 }
 
-/**
- * Closing popup window
- * @param {Object} popup window what you want to close
- */
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', popupEscClose);
-}
-
-/**
- * closing popup by pressing "ESC"
- * @param evt
- */
-function popupEscClose (evt) {
-  const key = evt.key;
-  const popup = document.querySelector('.popup_opened')
-  if (key === 'Escape') {
-    closePopup(popup);
-  }
-}
 
 //make this when loading page
 
