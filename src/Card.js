@@ -1,5 +1,4 @@
-import {openPopup, popupImage} from "./index.js";
-
+import PopupWithImage from "./PopupWithImage.js";
 export default class Card {
   constructor(name, link, cardTemplate) {
     this._name = name;
@@ -32,12 +31,12 @@ export default class Card {
   }
 
   _addListenerPopup() {
-    this._cardBlock.querySelector('.element__image').addEventListener('click', () => {
-      popupImage.querySelector('.popup__image').src = this._link;
-      popupImage.querySelector('.popup__image').alt = this._name;
-      popupImage.querySelector('.popup__subtitle').textContent = this._name;
-      openPopup(popupImage);
-    })
+    this._cardBlock.querySelector('.element__image').addEventListener('click', () => this._handleCardClick())
+  }
+
+  _handleCardClick() {
+    const openBigImg = new PopupWithImage(this._name, this._link);
+    openBigImg.open();
   }
 
   renderCard() {

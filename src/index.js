@@ -3,9 +3,10 @@
 import Card from './Card.js';
 import FormValidator from "./FormValidator.js";
 import Popup from "./Popup.js";
+import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
 import {config} from "./configValidation.js";
 import {initialCards} from "./initialCardsArr.js";
-import './index.css';
 
 // variables
 
@@ -30,9 +31,6 @@ const titleInput = formAdd.querySelector('.popup__text_input-type_title');
 const linkInput = formAdd.querySelector('.popup__text_input-type_link');
 // cards block
 const cardTemplate = document.querySelector('.template').content;
-// popup closing buttons array
-const popupsList = Array.from(document.querySelectorAll('.popup'));
-
 
 // Listeners
 /**
@@ -42,7 +40,8 @@ const popupsList = Array.from(document.querySelectorAll('.popup'));
 editButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
-  openPopup(popupEditProfile);
+  const openEditPopup = new PopupWithForm(popupEditProfile, formEdit);
+  openEditPopup.open();
   popupEditValidation.deleteErrorMessage();
 });
 /**
@@ -50,46 +49,10 @@ editButton.addEventListener('click', () => {
  * active by clicking addButton
  */
 addButton.addEventListener('click', () => {
-  formAdd.reset();
-  openPopup(popupAddCard);
+  const openAddPopup = new PopupWithForm(popupAddCard, formAdd);
+  openAddPopup.open();
   popupAddValidation.deleteErrorMessage();
 });
-/**
- * Start function handleEditProfile
- * active by clicking submit button in popupEditProfile
- */
-formEdit.addEventListener('submit', handleEditProfile);
-/**
- * Start function handleAddCard
- * active by clicking submit button in popupAddCard
- */
-formAdd.addEventListener('submit', handleAddCard);
-
-// functions
-
-/**
- * Closing popupEditProfile by pressing submit button
- * @param {*} evt standard event what must to be stopped
- */
-function handleEditProfile(evt) {
-  evt.preventDefault();
-  profileTitle.textContent = nameInput.value;
-  profileSubtitle.textContent = jobInput.value;
-  closePopup(popupEditProfile);
-}
-
-/**
- * Closing popupAddCard by pressing submit button and add new card in initialCards array
- * @param {*} evt
- */
-function handleAddCard(evt) {
-  evt.preventDefault();
-  const newArray = {name: titleInput.value, link: linkInput.value};
-  initialCards.push(newArray);
-  const card = new Card(newArray.name, newArray.link, cardTemplate);
-  card.renderCard();
-  closePopup(popupAddCard);
-}
 
 
 //make this when loading page
@@ -106,6 +69,6 @@ const popupAddValidation = new FormValidator(config, formAdd);
 popupAddValidation.enableValidation();
 
 //export
+export {formEdit, profileTitle, profileSubtitle};
 
-export {popupImage}
 
