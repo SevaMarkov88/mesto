@@ -69,6 +69,6 @@ const popupAddValidation = new FormValidator(config, formAdd);
 popupAddValidation.enableValidation();
 
 //export
-export {formEdit, profileTitle, profileSubtitle};
+export {profileTitle, profileSubtitle, cardTemplate, popupImage};
 
 

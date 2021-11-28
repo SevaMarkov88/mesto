@@ -1,4 +1,6 @@
 import PopupWithImage from "./PopupWithImage.js";
+import {popupImage} from "./index.js";
+
 export default class Card {
   constructor(name, link, cardTemplate) {
     this._name = name;
@@ -35,7 +37,7 @@ export default class Card {
   }
 
   _handleCardClick() {
-    const openBigImg = new PopupWithImage(this._name, this._link);
+    const openBigImg = new PopupWithImage(popupImage, this._name, this._link);
     openBigImg.open();
   }
 

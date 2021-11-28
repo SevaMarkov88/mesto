@@ -1,5 +1,6 @@
 import Popup from "./Popup.js";
-import {formEdit, profileTitle, profileSubtitle} from "./index.js";
+import Card from "./Card.js";
+import {profileTitle, profileSubtitle, cardTemplate} from "./index.js";
 
 export default class PopupWithForm extends Popup{
   constructor(popupSelector, formSubmit) {
@@ -13,10 +14,12 @@ export default class PopupWithForm extends Popup{
     inputList.forEach((input) => {
       inputValue[input.id.slice(6)] = input.value;
     });
-    console.table(inputValue);
-    if (this._formSubmit === formEdit) {
+    if (this._formSubmit.classList.contains('form-edit')) {
       profileTitle.textContent = inputValue.name;
       profileSubtitle.textContent = inputValue.job;
+    } else if (this._formSubmit.classList.contains('form-add')) {
+      const newCard = new Card(inputValue.title, inputValue.link, cardTemplate);
+      newCard.renderCard();
     }
   }
 
