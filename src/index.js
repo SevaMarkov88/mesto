@@ -65,17 +65,6 @@ formEdit.addEventListener('submit', handleEditProfile);
  */
 formAdd.addEventListener('submit', handleAddCard);
 
-/**
- * add event listeners to all popup closing buttons, overlay click or pressing "ESC"
- */
-popupsList.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target === popup || evt.target.classList.contains('popup__close')){
-      closePopup(popup);
-    }
-  });
-});
-
 // functions
 
 /**
@@ -118,5 +107,5 @@ popupAddValidation.enableValidation();
 
 //export
 
-export {openPopup, popupImage}
+export {popupImage}
 
