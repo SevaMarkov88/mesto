@@ -4,6 +4,7 @@ import Card from './Card.js';
 import FormValidator from "./FormValidator.js";
 import {config} from "./configValidation.js";
 import {initialCards} from "./initialCardsArr.js";
+import './index.css';
 
 // variables
 
