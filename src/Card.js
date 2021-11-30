@@ -1,5 +1,5 @@
 import PopupWithImage from "./PopupWithImage.js";
-import {popupImage} from "./index.js";
+import {popupImage, cardsContainer} from "./index.js";
 
 export default class Card {
   constructor(name, link, cardTemplate) {
@@ -8,7 +8,7 @@ export default class Card {
     this._cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
   }
 
-  _createCard() {
+  createCard() {
     this._cardBlock.querySelector('.element__image').src = this._link;
     this._cardBlock.querySelector('.element__image').alt = this._name;
     this._cardBlock.querySelector('.element__title').textContent = this._name;
@@ -42,6 +42,6 @@ export default class Card {
   }
 
   renderCard() {
-    document.querySelector('.elements').prepend(this._createCard());
+    cardsContainer.prepend(this.createCard());
   }
 }

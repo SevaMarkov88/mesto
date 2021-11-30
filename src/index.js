@@ -2,8 +2,7 @@
 
 import Card from './Card.js';
 import FormValidator from "./FormValidator.js";
-import Popup from "./Popup.js";
-import PopupWithImage from "./PopupWithImage.js";
+import Section from "./Section.js";
 import PopupWithForm from "./PopupWithForm.js";
 import {config} from "./configValidation.js";
 import {initialCards} from "./initialCardsArr.js";
@@ -25,12 +24,11 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 const formEdit = document.querySelector('.form-edit');
 const nameInput = formEdit.querySelector('.popup__text_input-type_name');
 const jobInput = formEdit.querySelector('.popup__text_input-type_job');
-// popup add card form & both inputs
+// popup add card form
 const formAdd = document.querySelector('.form-add');
-const titleInput = formAdd.querySelector('.popup__text_input-type_title');
-const linkInput = formAdd.querySelector('.popup__text_input-type_link');
 // cards block
 const cardTemplate = document.querySelector('.template').content;
+const cardsContainer = document.querySelector('.elements');
 
 // Listeners
 /**
@@ -56,12 +54,20 @@ addButton.addEventListener('click', () => {
 
 
 //make this when loading page
+const renderCardsArr = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    console.log(item);
+    const newCard = new Card(item.name, item.link, cardTemplate);
+    const cardElement = newCard.createCard();
 
-//add initial cards on page
-initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link, cardTemplate);
-  card.renderCard();
-})
+    renderCardsArr.addItem(cardElement);
+  }
+},
+  cardsContainer
+);
+
+renderCardsArr.renderContainer();
 
 const popupEditValidation = new FormValidator(config, formEdit);
 popupEditValidation.enableValidation();
@@ -69,6 +75,6 @@ const popupAddValidation = new FormValidator(config, formAdd);
 popupAddValidation.enableValidation();
 
 //export
-export {profileTitle, profileSubtitle, cardTemplate, popupImage};
+export {profileTitle, profileSubtitle, cardTemplate, popupImage, cardsContainer};
 
 
