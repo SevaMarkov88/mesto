@@ -6,6 +6,7 @@ import Section from "./Section.js";
 import PopupWithForm from "./PopupWithForm.js";
 import {config} from "./configValidation.js";
 import {initialCards} from "./initialCardsArr.js";
+import './index.css';
 
 // variables
 
