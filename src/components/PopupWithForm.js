@@ -1,7 +1,7 @@
 import Popup from "./Popup.js";
 import Card from "./Card.js";
 import UserInfo from "./UserInfo.js";
-import {cardTemplate} from "./index.js";
+import {cardTemplate} from "../pages";
 
 export default class PopupWithForm extends Popup{
   constructor(popupSelector, formSubmit) {

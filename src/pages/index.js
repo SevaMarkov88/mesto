@@ -1,11 +1,11 @@
 //import
 
-import Card from './Card.js';
-import FormValidator from "./FormValidator.js";
-import Section from "./Section.js";
-import PopupWithForm from "./PopupWithForm.js";
-import {config} from "./configValidation.js";
-import {initialCards} from "./initialCardsArr.js";
+import Card from '../components/Card.js';
+import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import {config} from "../components/configValidation.js";
+import {initialCards} from "../components/initialCardsArr.js";
 import './index.css';
 
 // variables
