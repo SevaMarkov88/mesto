@@ -1,6 +1,7 @@
 import Popup from "./Popup.js";
 import Card from "./Card.js";
-import {profileTitle, profileSubtitle, cardTemplate} from "./index.js";
+import UserInfo from "./UserInfo.js";
+import {cardTemplate} from "./index.js";
 
 export default class PopupWithForm extends Popup{
   constructor(popupSelector, formSubmit) {
@@ -15,8 +16,8 @@ export default class PopupWithForm extends Popup{
       inputValue[input.id.slice(6)] = input.value;
     });
     if (this._formSubmit.classList.contains('form-edit')) {
-      profileTitle.textContent = inputValue.name;
-      profileSubtitle.textContent = inputValue.job;
+      const newProfile = new UserInfo(inputValue.name, inputValue.job);
+      newProfile.setUserInfo();
     } else if (this._formSubmit.classList.contains('form-add')) {
       const newCard = new Card(inputValue.title, inputValue.link, cardTemplate);
       newCard.renderCard();
