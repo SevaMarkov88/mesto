@@ -1,19 +1,16 @@
-import {profileSubtitle, profileTitle} from "../pages";
-
 export default class UserInfo {
-  constructor(name, job) {
-    this._name = name;
-    this._job = job;
+  constructor(nameElement, jobElement) {
+    this._name = document.querySelector(nameElement);
+    this._job = document.querySelector(jobElement);
   }
 
   getUserInfo() {
-    return [this._name, this._job];
+    return [this._name.textContent, this._job.textContent];
   }
 
-  setUserInfo() {
-    const profileObj = this.getUserInfo();
-    profileTitle.textContent = profileObj[0];
-    profileSubtitle.textContent = profileObj[1];
+  setUserInfo(name, job) {
+    document.querySelector('.profile__title').textContent = name;
+    document.querySelector('.profile__subtitle').textContent = job;
 
   }
 }

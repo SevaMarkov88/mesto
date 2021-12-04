@@ -1,40 +1,43 @@
 import Popup from "./Popup.js";
-import Card from "./Card.js";
-import UserInfo from "./UserInfo.js";
-import {cardTemplate} from "../pages";
 
-export default class PopupWithForm extends Popup{
+export default class PopupWithForm extends Popup {
   constructor(popupSelector, formSubmit) {
     super(popupSelector);
+    this._popupSelector = document.querySelector(popupSelector);
+    this._form = this._popupSelector.querySelector('form');
     this._formSubmit = formSubmit;
+    this._handleSubmitListener = this._handleSubmitListener.bind(this);
   }
 
   _getInputValues() {
-    const inputList = [...this._formSubmit.querySelectorAll('.popup__text')];
-    const inputValue = {};
+    const inputList = [...this._form.querySelectorAll('.popup__text')];
+    const formValues = {};
     inputList.forEach((input) => {
-      inputValue[input.id.slice(6)] = input.value;
+      console.log(input.name);
+      formValues[input.name] = input.value;
     });
-    if (this._formSubmit.classList.contains('form-edit')) {
-      const newProfile = new UserInfo(inputValue.name, inputValue.job);
-      newProfile.setUserInfo();
-    } else if (this._formSubmit.classList.contains('form-add')) {
-      const newCard = new Card(inputValue.title, inputValue.link, cardTemplate);
-      newCard.renderCard();
-    }
+    console.log(formValues);
+    return formValues;
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._formSubmit.addEventListener('submit', (evt) => {
+    this._form.addEventListener('submit', this._handleSubmitListener);
+  }
+
+  _handleSubmitListener(evt) {
       evt.preventDefault();
-      this._getInputValues();
+      this._formSubmit(this._getInputValues());
       this.close();
-    })
+  }
+
+  _removeListeners() {
+    super._removeListeners();
+    this._form.removeEventListener('submit', this._handleSubmitListener);
   }
 
   close() {
+    this._form.reset();
     super.close();
-    this._formSubmit.reset();
   }
 }

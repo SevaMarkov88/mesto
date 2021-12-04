@@ -2,24 +2,23 @@ export default class FormValidator {
   constructor(config, form) {
     this._config = config;
     this._form = form;
+    this._inputList = [...this._form.querySelectorAll(this._config.inputSelector)];
+    this._submitButton = this._form.querySelector(this._config.submitButtonSelector);
   }
 
   enableValidation() {
-    const inputList = [...this._form.querySelectorAll(this._config.inputSelector)];
-    const submitButton = this._form.querySelector(this._config.submitButtonSelector);
+    this._toggleSubmitButton(this._submitButton);
+    this._deleteErrorMessage();
 
-    this._toggleSubmitButton(submitButton);
-
-    inputList.forEach((input) => {
+    this._inputList.forEach((input) => {
       input.addEventListener('input', () => {
         this._checkInputValidity(input);
-        this._toggleSubmitButton(submitButton);
+        this._toggleSubmitButton(this._submitButton);
       })
     })
-
   }
 
-  _checkInputValidity (input) {
+  _checkInputValidity(input) {
     !input.validity.valid ? this._showErrorMassage(input) : this._hideErrorMassage(input);
   }
 
@@ -48,10 +47,14 @@ export default class FormValidator {
     }
   }
 
-  deleteErrorMessage() {
-    if (this._form.closest(`.${this._config.popupClass}`).classList.contains(this._config.openedPopupClass)) {
-      const inputList = [...this._form.querySelectorAll(this._config.inputSelector)];
-      inputList.forEach((input) => {this._hideErrorMassage(input);});
-    }
+  _deleteErrorMessage() {
+    this._inputList.forEach((input) => {
+      this._hideErrorMassage(input);
+    });
+  }
+
+  submitButtonDisable() {
+    this._submitButton.disabled = true;
+    this._submitButton.classList.add(this._config.inactiveButtonClass);
   }
 }
