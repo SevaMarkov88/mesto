@@ -9,8 +9,7 @@ export default class UserInfo {
   }
 
   setUserInfo(name, job) {
-    document.querySelector('.profile__title').textContent = name;
-    document.querySelector('.profile__subtitle').textContent = job;
-
+    this._name.textContent = name;
+    this._job.textContent = job;
   }
 }

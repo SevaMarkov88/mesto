@@ -37,13 +37,12 @@ export default class FormValidator {
     errorElement.classList.remove(this._config.errorClass);
   }
 
-  _toggleSubmitButton(button) {
+  _toggleSubmitButton() {
     if (!this._form.checkValidity()) {
-      button.classList.add(this._config.inactiveButtonClass);
-      button.disabled = true;
+      this.submitButtonDisable();
     } else {
-      button.classList.remove(this._config.inactiveButtonClass);
-      button.disabled = false;
+      this._submitButton.classList.remove(this._config.inactiveButtonClass);
+      this._submitButton.disabled = false;
     }
   }
 

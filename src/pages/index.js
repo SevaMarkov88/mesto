@@ -8,7 +8,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import {config} from "../utils/configValidation.js";
 import {initialCards} from "../utils/initialCardsArr.js";
 import UserInfo from "../components/UserInfo.js";
-// import './index.css';
+import './index.css';
 
 // variables
 
@@ -16,9 +16,6 @@ import UserInfo from "../components/UserInfo.js";
 const editButton = document.querySelector('.profile__button-edit');
 // add card button
 const addButton = document.querySelector('.profile__button-add');
-// profile title & subtitle
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
 // popup edit profile form & both input
 const formEdit = document.querySelector('.form-edit');
 const nameInput = formEdit.querySelector('.popup__text_input-type_name');
@@ -36,19 +33,29 @@ popupAddValidation.enableValidation();
 const popupEditValidation = new FormValidator(config, formEdit);
 popupEditValidation.enableValidation();
 
+//profile form inputs info adding
+
+const profileInfo = new UserInfo('.profile__title', '.profile__subtitle');
+
+//popups creating
+
+const openEditPopup = new PopupWithForm('.popup_edit-profile', submitHandlerProfile);
+openEditPopup.setEventListeners();
+const openAddPopup = new PopupWithForm('.popup_add-card', submitHandlerCard);
+openAddPopup.setEventListeners();
+const openBigImg = new PopupWithImage('.popup_image-fullscreen');
+openBigImg.setEventListeners();
+
 // Listeners
 /**
  * Place profile title and subtitle from page to input field whet opening popupEditProfile
  * active by clicking editButton
  */
 editButton.addEventListener('click', () => {
-  const profileInfo = new UserInfo('.profile__title', '.profile__subtitle');
   const userInfo = profileInfo.getUserInfo();
   nameInput.value = userInfo[0];
   jobInput.value = userInfo[1];
-  const openEditPopup = new PopupWithForm('.popup_edit-profile', submitHandler);
   openEditPopup.open();
-  openEditPopup.setEventListeners();
   popupEditValidation.submitButtonDisable();
 });
 /**
@@ -56,9 +63,7 @@ editButton.addEventListener('click', () => {
  * active by clicking addButton
  */
 addButton.addEventListener('click', () => {
-  const openAddPopup = new PopupWithForm('.popup_add-card', submitHandler);
   openAddPopup.open();
-  openAddPopup.setEventListeners();
   popupAddValidation.submitButtonDisable();
 });
 
@@ -67,8 +72,7 @@ addButton.addEventListener('click', () => {
 const renderCardsArr = new Section({
     items: initialCards,
     renderer: (item) => {
-      const newCard = new Card(item.name, item.link, cardTemplate, handleCardClick);
-      renderCardsArr.addItem(newCard.createCard());
+      renderCardsArr.addItem(createCard(item.name, item.link));
     }
   },
   cardsContainer
@@ -79,20 +83,20 @@ renderCardsArr.renderContainer();
 //functions
 
 function handleCardClick(name, link) {
-  const openBigImg = new PopupWithImage('.popup_image-fullscreen');
   openBigImg.open(name, link);
-  openBigImg.setEventListeners();
 }
 
-function submitHandler(inputsArr) {
-  if (this._form.classList.contains('form-edit')) {
-    const newProfile = new UserInfo('.profile__title', '.profile__subtitle');
-    newProfile.setUserInfo(inputsArr.name, inputsArr.job);
-  } else if (this._form.classList.contains('form-add')) {
-    const newCard = new Card(inputsArr.title, inputsArr.link, cardTemplate, handleCardClick);
-    renderCardsArr.addItem(newCard.createCard());
-  }
+function submitHandlerProfile(inputsArr) {
+    profileInfo.setUserInfo(inputsArr.name, inputsArr.job);
 }
 
+function submitHandlerCard(inputsArr) {
+  renderCardsArr.addItem(createCard(inputsArr.title, inputsArr.link));
+}
+
+function createCard (name, link) {
+  const newCard = new Card(name, link, cardTemplate, handleCardClick);
+  return newCard.createCard();
+}
 
 
