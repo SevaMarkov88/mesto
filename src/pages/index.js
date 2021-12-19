@@ -81,7 +81,6 @@ addButton.addEventListener('click', () => {
 //make this when loading page
 api.getUserInfo()
   .then(res => {
-    console.log(res);
     document.querySelector('.profile__title').textContent = res.name;
     document.querySelector('.profile__subtitle').textContent = res.about;
     document.querySelector('.profile__image').src = res.avatar;
@@ -93,6 +92,7 @@ api.getInitialCards()
     res.forEach(item => {
       submitHandlerCard(item)
     });
+    console.log(res);
   })
   .catch(err => console.log(err))
 
@@ -123,11 +123,11 @@ function submitHandlerProfile(inputsArr) {
 
 function submitHandlerCard(inputsArr) {
   initialCards.push(inputsArr);
-  renderCardsArr.addItem(createCard(inputsArr.title, inputsArr.link));
+  renderCardsArr.addItem(createCard(inputsArr.name, inputsArr.link, inputsArr.likes.length));
 }
 
-function createCard (name, link) {
-  const newCard = new Card(name, link, cardTemplate, handleCardClick);
+function createCard (name, link, likes) {
+  const newCard = new Card(name, link, likes, cardTemplate, handleCardClick);
   return newCard.createCard();
 }
 
