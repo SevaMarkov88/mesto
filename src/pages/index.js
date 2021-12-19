@@ -1,5 +1,6 @@
 //import
 
+import Api from '../components/Api.js'
 import Card from '../components/Card.js';
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -8,7 +9,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import {config} from "../utils/configValidation.js";
 import {initialCards} from "../utils/initialCardsArr.js";
 import UserInfo from "../components/UserInfo.js";
-import './index.css';
+// import './index.css';
 
 // variables
 
@@ -46,6 +47,15 @@ openAddPopup.setEventListeners();
 const openBigImg = new PopupWithImage('.popup_image-fullscreen');
 openBigImg.setEventListeners();
 
+//API active
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-32',
+  headers: {
+    authorization: '78a9a2e8-0028-4357-9dc5-3dfee740ccb0'
+  }
+});
+
 // Listeners
 /**
  * Place profile title and subtitle from page to input field whet opening popupEditProfile
@@ -69,6 +79,24 @@ addButton.addEventListener('click', () => {
 
 
 //make this when loading page
+api.getUserInfo()
+  .then(res => {
+    console.log(res);
+    document.querySelector('.profile__title').textContent = res.name;
+    document.querySelector('.profile__subtitle').textContent = res.about;
+    document.querySelector('.profile__image').src = res.avatar;
+  })
+  .catch(err => console.log(err))
+
+api.getInitialCards()
+  .then(res => {
+    res.forEach(item => {
+      submitHandlerCard(item)
+    });
+  })
+  .catch(err => console.log(err))
+
+
 const renderCardsArr = new Section({
     items: initialCards,
     renderer: (item) => {
@@ -88,9 +116,13 @@ function handleCardClick(name, link) {
 
 function submitHandlerProfile(inputsArr) {
     profileInfo.setUserInfo(inputsArr.name, inputsArr.job);
+    api.updateUserInfo(inputsArr.name, inputsArr.job)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
 }
 
 function submitHandlerCard(inputsArr) {
+  initialCards.push(inputsArr);
   renderCardsArr.addItem(createCard(inputsArr.title, inputsArr.link));
 }
 
