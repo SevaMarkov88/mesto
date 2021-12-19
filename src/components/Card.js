@@ -1,10 +1,11 @@
 export default class Card {
-  constructor(name, link, likes, cardTemplate, handleCardClick) {
+  constructor(name, link, likes, cardTemplate, handleCardClick, handleDeleteCard) {
     this._name = name;
     this._link = link;
     this._likes = likes;
     this._cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
     this._handleCardClick = handleCardClick;
+    this._handleDeleteCard = handleDeleteCard;
     this._cardImage = this._cardBlock.querySelector('.element__image');
     this._likeCounter = this._cardBlock.querySelector('.element__counter')
   }
@@ -25,7 +26,7 @@ export default class Card {
       evt.target.classList.toggle('element__like_active');
     });
     this._cardBlock.querySelector('.element__trash').addEventListener('click', (evt) => {
-      evt.target.closest('.element').remove();
+      this._handleDeleteCard(evt);
     });
     this._cardImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
   }

@@ -9,6 +9,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import {config} from "../utils/configValidation.js";
 import {initialCards} from "../utils/initialCardsArr.js";
 import UserInfo from "../components/UserInfo.js";
+import Popup from "../components/Popup.js";
 // import './index.css';
 
 // variables
@@ -26,6 +27,9 @@ const formAdd = document.querySelector('.form-add');
 // cards block
 const cardTemplate = document.querySelector('.template').content;
 const cardsContainer = document.querySelector('.elements');
+//delete card popup
+const cardDeletePopup = document.querySelector('.popup_accept-delete');
+let cardDeleteElement;
 
 //validation enable
 
@@ -46,6 +50,8 @@ const openAddPopup = new PopupWithForm('.popup_add-card', submitHandlerCard);
 openAddPopup.setEventListeners();
 const openBigImg = new PopupWithImage('.popup_image-fullscreen');
 openBigImg.setEventListeners();
+const openDeleteCardPopup = new Popup('.popup_accept-delete');
+openDeleteCardPopup.setEventListeners();
 
 //API active
 
@@ -75,6 +81,11 @@ editButton.addEventListener('click', () => {
 addButton.addEventListener('click', () => {
   openAddPopup.open();
   popupAddValidation.submitButtonDisable();
+});
+
+cardDeletePopup.querySelector('.popup__button').addEventListener('click', () => {
+  cardDeleteElement.remove();
+  openDeleteCardPopup.close();
 });
 
 
@@ -127,8 +138,13 @@ function submitHandlerCard(inputsArr) {
 }
 
 function createCard (name, link, likes) {
-  const newCard = new Card(name, link, likes, cardTemplate, handleCardClick);
+  const newCard = new Card(name, link, likes, cardTemplate, handleCardClick, handleDeleteCard);
   return newCard.createCard();
+}
+
+function handleDeleteCard(evt) {
+  openDeleteCardPopup.open();
+  cardDeleteElement = evt.target.closest('.element');
 }
 
 
