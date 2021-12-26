@@ -12,16 +12,16 @@
 
 <div class="page__container">
   <header class="header">
-    <img src="<%require('/images/logo.svg')%>" alt="Логотип" class="logo header__logo">
+    <img src="<%=require('./images/logo.svg')%>" alt="Логотип" class="logo header__logo">
   </header>
 
   <main class="main">
 
     <section class="profile">
       <div class="profile__popup">
-        <img src="<%require('/images/profile_photo_edit.svg')%>" alt="Редактировать профиль">
+        <img src="<%=require('./images/profile_photo_edit.svg')%>" alt="Редактировать профиль">
       </div>
-      <img src="src/images/profile.jpg" alt="Фото профиля" class="profile__image">
+      <img src="<%=require('./images/profile.jpg')%>" alt="Фото профиля" class="profile__image">
       <div class="profile__info">
         <div class="profile__text">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
