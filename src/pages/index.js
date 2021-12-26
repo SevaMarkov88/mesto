@@ -10,7 +10,7 @@ import {config} from "../utils/configValidation.js";
 import {initialCards} from "../utils/initialCardsArr.js";
 import UserInfo from "../components/UserInfo.js";
 import Popup from "../components/Popup.js";
-// import './index.css';
+import './index.css';
 
 // variables
 
