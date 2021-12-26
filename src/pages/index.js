@@ -85,9 +85,12 @@ addButton.addEventListener('click', () => {
 });
 
 cardDeletePopup.querySelector('.popup__button').addEventListener('click', () => {
-  cardDeleteElement.remove();
+  console.log(cardDeleteElement)
   api.deleteCard(cardDeleteElement)
-    .then(res => console.log(res))
+    .then(res => {
+      console.log(res);
+      cardDeleteElement.remove()
+    })
     .catch(err => console.log(err))
   openDeleteCardPopup.close();
 });
@@ -101,7 +104,6 @@ api.getUserInfo()
     document.querySelector('.profile').id = res._id;
     document.querySelector('.profile__image').src = res.avatar;
     userId = res._id;
-    console.log(userId);
   })
   .catch(err => console.log(err))
 
@@ -128,10 +130,13 @@ function handleCardClick(name, link) {
   openBigImg.open(name, link);
 }
 
-function handleLike(item) {
-  item.target.classList.toggle('element__like_active');
-  api.toggleLike(item)
-    .then(res => console.log(res))
+function handleLike(evt) {
+  const element = evt.target.closest('.element');
+  api.toggleLike(element)
+    .then(res => {
+      element.querySelector('.element__counter').textContent = res.likes.length;
+      evt.target.classList.toggle('element__like_active');
+    })
     .catch(err => console.log(err))
 }
 
@@ -144,7 +149,6 @@ function submitHandlerProfile(inputsArr) {
 
 function submitHandlerCard(inputsArr) {
   initialCards.push(inputsArr);
-  console.log(initialCards);
   api.addNewCard(inputsArr.title, inputsArr.link)
     .then(res => {
       console.log(res)

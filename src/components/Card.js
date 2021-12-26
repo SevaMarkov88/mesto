@@ -20,7 +20,6 @@ export default class Card {
     this._cardBlock.id = this._cardId;
     this._likeCounter.textContent = this._likes;
     this._cardBlock.querySelector('.element__title').textContent = this._name;
-    console.log(this._ownerId, this._pageOwnerId);
 
     if (this._pageOwnerId !== this._ownerId) {
       this._cardBlock.querySelector('.element__trash').remove();

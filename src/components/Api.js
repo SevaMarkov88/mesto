@@ -57,12 +57,13 @@ export default class Api {
         link: link
       })
     })
-      .then(res => this._handleFetch(res));
+      .then(res => this._handleFetch(res))
   }
 
-  toggleLike(cardId) {
-    if (cardId.classList.contains('element__like_active')) {
-      return fetch(`${this.url}/cards/${cardId}/likes`, {
+  toggleLike(element) {
+    console.log(element.id)
+    if (element.querySelector('.element__like').classList.contains('element__like_active')) {
+      return fetch(`${this.url}/cards/${element.id}/likes`, {
         method: 'DELETE',
         headers: {
           'authorization': this.token,
@@ -71,12 +72,15 @@ export default class Api {
       })
         .then(res => this._handleFetch(res));
     } else {
-      return fetch(`${this.url}/cards/${cardId}/likes`, {
+      return fetch(`${this.url}/cards/${element.id}/likes`, {
         method: 'PUT',
         headers: {
           'authorization': this.token,
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({
+          likes: []
+        })
       })
         .then(res => this._handleFetch(res));
 
@@ -84,8 +88,8 @@ export default class Api {
   }
 
 
-  deleteCard(cardId) {
-    return fetch(`${this.url}/cards/${cardId}`, {
+  deleteCard(element) {
+    return fetch(`${this.url}/cards/${element.id}`, {
       method: 'DELETE',
       headers: {
         'authorization': this.token,
