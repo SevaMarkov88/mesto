@@ -157,23 +157,25 @@ function handleLike(evt) {
 function submitHandlerProfile(inputsArr) {
   profileInfo.setUserInfo(inputsArr.name, inputsArr.job);
   api.updateUserInfo(inputsArr.name, inputsArr.job)
-    .then(res => console.log(res))
+    .then(res => {
+      console.log(res);
+    })
     .catch(err => console.log(err))
 }
 
 function submitHandlerAvatar(input) {
-  console.log(input.link)
   profileInfo.setUserAvatar(input.link)
   api.updateAvatar(input.link)
-    .then(res => console.log(res))
+    .then(res => {
+      console.log(res);
+    })
     .catch(err => console.log(err))
 }
 
 function submitHandlerCard(inputsArr) {
-  initialCards.push(inputsArr);
   api.addNewCard(inputsArr.title, inputsArr.link)
     .then(res => {
-      console.log(res)
+      console.log(res);
       renderCardsArr.addItem(createCard(res));
     })
     .catch(err => console.log(err))
