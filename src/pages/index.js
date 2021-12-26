@@ -30,6 +30,7 @@ const cardsContainer = document.querySelector('.elements');
 //delete card popup
 const cardDeletePopup = document.querySelector('.popup_accept-delete');
 let cardDeleteElement;
+let userId;
 
 //validation enable
 
@@ -85,6 +86,9 @@ addButton.addEventListener('click', () => {
 
 cardDeletePopup.querySelector('.popup__button').addEventListener('click', () => {
   cardDeleteElement.remove();
+  api.deleteCard(cardDeleteElement)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
   openDeleteCardPopup.close();
 });
 
@@ -94,16 +98,17 @@ api.getUserInfo()
   .then(res => {
     document.querySelector('.profile__title').textContent = res.name;
     document.querySelector('.profile__subtitle').textContent = res.about;
+    document.querySelector('.profile').id = res._id;
     document.querySelector('.profile__image').src = res.avatar;
+    userId = res._id;
+    console.log(userId);
   })
   .catch(err => console.log(err))
 
 api.getInitialCards()
   .then(res => {
-    res.forEach(item => {
-      submitHandlerCard(item)
-    });
-    console.log(res);
+    res.forEach(item => initialCards.push(item));
+    renderCardsArr.renderContainer();
   })
   .catch(err => console.log(err))
 
@@ -111,13 +116,11 @@ api.getInitialCards()
 const renderCardsArr = new Section({
     items: initialCards,
     renderer: (item) => {
-      renderCardsArr.addItem(createCard(item.name, item.link));
+      renderCardsArr.addItem(createCard(item));
     }
   },
   cardsContainer
 );
-
-renderCardsArr.renderContainer();
 
 //functions
 
@@ -125,20 +128,34 @@ function handleCardClick(name, link) {
   openBigImg.open(name, link);
 }
 
+function handleLike(item) {
+  item.target.classList.toggle('element__like_active');
+  api.toggleLike(item)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+}
+
 function submitHandlerProfile(inputsArr) {
-    profileInfo.setUserInfo(inputsArr.name, inputsArr.job);
-    api.updateUserInfo(inputsArr.name, inputsArr.job)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+  profileInfo.setUserInfo(inputsArr.name, inputsArr.job);
+  api.updateUserInfo(inputsArr.name, inputsArr.job)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
 }
 
 function submitHandlerCard(inputsArr) {
   initialCards.push(inputsArr);
-  renderCardsArr.addItem(createCard(inputsArr.name, inputsArr.link, inputsArr.likes.length));
+  console.log(initialCards);
+  api.addNewCard(inputsArr.title, inputsArr.link)
+    .then(res => {
+      console.log(res)
+      renderCardsArr.addItem(createCard(res));
+    })
+    .catch(err => console.log(err))
+
 }
 
-function createCard (name, link, likes) {
-  const newCard = new Card(name, link, likes, cardTemplate, handleCardClick, handleDeleteCard);
+function createCard(data) {
+  const newCard = new Card(data, cardTemplate, handleCardClick, handleDeleteCard, handleLike, userId);
   return newCard.createCard();
 }
 
@@ -146,5 +163,6 @@ function handleDeleteCard(evt) {
   openDeleteCardPopup.open();
   cardDeleteElement = evt.target.closest('.element');
 }
+
 
 
