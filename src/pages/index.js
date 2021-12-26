@@ -113,10 +113,9 @@ cardDeletePopup.querySelector('.popup__button').addEventListener('click', () => 
 //make this when loading page
 api.getUserInfo()
   .then(res => {
-    document.querySelector('.profile__title').textContent = res.name;
-    document.querySelector('.profile__subtitle').textContent = res.about;
+    profileInfo.setUserInfo(res.name, res.about);
     document.querySelector('.profile').id = res._id;
-    document.querySelector('.profile__image').src = res.avatar;
+    profileInfo.setUserAvatar(res.avatar);
     userId = res._id;
   })
   .catch(err => console.log(err))
