@@ -114,6 +114,19 @@ export default class Api {
       .then(res => this._handleFetch(res));
   }
 
+  updateAvatar(link) {
+    return fetch(`${this.url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        'authorization': this.token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: link
+      })
+    })
+      .then(res => this._handleFetch(res));
+  }
 }
 
 

@@ -22,6 +22,10 @@ const addButton = document.querySelector('.profile__button-add');
 const formEdit = document.querySelector('.form-edit');
 const nameInput = formEdit.querySelector('.popup__text_input-type_name');
 const jobInput = formEdit.querySelector('.popup__text_input-type_job');
+//button edit avatar
+const editAvatarButton = document.querySelector('.profile__popup');
+//popup edit avatar
+const formAvatarEdit = document.querySelector('.form-avatar')
 // popup add card form
 const formAdd = document.querySelector('.form-add');
 // cards block
@@ -38,10 +42,12 @@ const popupAddValidation = new FormValidator(config, formAdd);
 popupAddValidation.enableValidation();
 const popupEditValidation = new FormValidator(config, formEdit);
 popupEditValidation.enableValidation();
+const popupEditAvatarValidation = new FormValidator(config, formAvatarEdit);
+popupEditAvatarValidation.enableValidation();
 
 //profile form inputs info adding
 
-const profileInfo = new UserInfo('.profile__title', '.profile__subtitle');
+const profileInfo = new UserInfo('.profile__title', '.profile__subtitle', '.profile__image');
 
 //popups creating
 
@@ -53,6 +59,8 @@ const openBigImg = new PopupWithImage('.popup_image-fullscreen');
 openBigImg.setEventListeners();
 const openDeleteCardPopup = new Popup('.popup_accept-delete');
 openDeleteCardPopup.setEventListeners();
+const openEditAvatarPopup = new PopupWithForm('.popup_avatar-edit', submitHandlerAvatar);
+openEditAvatarPopup.setEventListeners();
 
 //API active
 
@@ -83,6 +91,12 @@ addButton.addEventListener('click', () => {
   openAddPopup.open();
   popupAddValidation.submitButtonDisable();
 });
+
+editAvatarButton.addEventListener('click', () => {
+  openEditAvatarPopup.open();
+  popupEditAvatarValidation.submitButtonDisable();
+})
+
 
 cardDeletePopup.querySelector('.popup__button').addEventListener('click', () => {
   console.log(cardDeleteElement)
@@ -143,6 +157,14 @@ function handleLike(evt) {
 function submitHandlerProfile(inputsArr) {
   profileInfo.setUserInfo(inputsArr.name, inputsArr.job);
   api.updateUserInfo(inputsArr.name, inputsArr.job)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+}
+
+function submitHandlerAvatar(input) {
+  console.log(input.link)
+  profileInfo.setUserAvatar(input.link)
+  api.updateAvatar(input.link)
     .then(res => console.log(res))
     .catch(err => console.log(err))
 }
