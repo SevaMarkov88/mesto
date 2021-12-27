@@ -31,11 +31,10 @@ export default class Card {
   }
 
   _setEventListeners() {
-    const trashIcon = this._cardBlock.querySelector('.element__trash');
     this._cardBlock.querySelector('.element__like').addEventListener('click', (evt) => {
       this._handleLike(evt);
     });
-    if (this._cardBlock.contains(trashIcon)) {
+    if (this._pageOwnerId === this._ownerId) {
       this._cardBlock.querySelector('.element__trash').addEventListener('click', (evt) => {
         this._handleDeleteCard(evt);
       });
