@@ -30,6 +30,10 @@ export default class Card {
     return this._cardBlock;
   }
 
+  toggleLike(element) {
+    return element.querySelector('.element__like').classList.contains('element__like_active');
+  }
+
   _setEventListeners() {
     this._cardBlock.querySelector('.element__like').addEventListener('click', (evt) => {
       this._handleLike(evt);
