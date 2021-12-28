@@ -16,3 +16,10 @@
   opacity: 1;
   cursor: pointer;
 }
+
+@media (max-width: 615px) {
+  .profile__popup {
+    margin: auto;
+    right: 0;
+  }
+}

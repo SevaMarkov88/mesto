@@ -9,7 +9,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import {config} from "../utils/configValidation.js";
 import UserInfo from "../components/UserInfo.js";
-import './index.css';
+// import './index.css';
 
 // variables
 
@@ -116,8 +116,8 @@ const renderCardsArr = new Section({
 
 function createCard(data) {
   const card = new Card(data, cardTemplate, handleCardClick, {
-    handleDeleteCard: (cardId) => {
-      confirmPopup.open(cardId, cards.deleteCard)
+    handleDeleteCard: (cardElem) => {
+      confirmPopup.open(cardElem)
     }
   }, {
     handleLike: (item) => {
@@ -187,10 +187,10 @@ function submitHandlerCard(inputsArr) {
     })
 }
 
-function submitHandlerConfirm(card, deleteFunc) {
-  api.deleteCard(card.id)
+function submitHandlerConfirm(cardElem) {
+  api.deleteCard(cardElem._data._id)
     .then(() => {
-      deleteFunc(card);
+      cardElem.deleteCard();
       confirmPopup.close()
     })
     .catch(err => console.log(err))
