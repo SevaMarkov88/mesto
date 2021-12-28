@@ -121,18 +121,18 @@ function createCard(data) {
         }
     }, {
         handleLike: (card) => {
-            if (cards.isLiked()) {
-                api.removeLike(card.id)
-                    .then(res => {
-                        console.log(res,card.id);
-                        cards.updateLike(card.id)
+            if (cards.isLiked(card)) {
+                api.removeLike(card._id)
+                    .then((res) => {
+                        console.log(res)
+                        cards.updateLike(res)
                     })
                     .catch(err => console.log(err))
             } else {
-                api.addLike(card.id)
-                    .then(res => {
-                        console.log(res, card.id);
-                        cards.updateLike(card.id);
+                api.addLike(card._id)
+                    .then((res) => {
+                        console.log(res)
+                        cards.updateLike(res);
                     })
                     .catch(err => console.log(err))
             }

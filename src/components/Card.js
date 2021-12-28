@@ -23,22 +23,23 @@ export default class Card {
         }
 
         this._setEventListeners();
-        this._colorLike();
+        this._colorLike(this._data);
 
         return this._cardBlock;
     }
 
-    isLiked() {
-        return this._data.likes.some(user => user.id === this._pageOwnerId);
+    isLiked(obj) {
+        return obj.likes.some(user => user._id === this._pageOwnerId);
     }
 
     updateLike(obj) {
+        this._data = obj;
         this._likeCounter.textContent = obj.likes.length;
-        this._colorLike();
+        this._colorLike(obj);
     }
 
-    _colorLike() {
-        if (!this.isLiked()) {
+    _colorLike(obj) {
+        if (!this.isLiked(obj)) {
             this._cardLike.classList.remove('element__like_active');
         } else {
             this._cardLike.classList.add('element__like_active');
@@ -47,11 +48,11 @@ export default class Card {
 
     _setEventListeners() {
         this._cardBlock.querySelector('.element__like').addEventListener('click', () => {
-            this._handleLike(this._cardBlock);
+            this._handleLike(this._data);
         });
         if (this._pageOwnerId === this._data.owner._id) {
             this._cardBlock.querySelector('.element__trash').addEventListener('click', () => {
-                this._handleDeleteCard(this._cardBlock);
+                this._handleDeleteCard(this);
             });
         }
         this._cardImage.addEventListener('click', () => this._handleCardClick(this._data.name, this._data.link));

@@ -23,17 +23,6 @@ export default class Api {
 
     }
 
-    getCardUserName(cardId) {
-        return fetch(`${this.url}/cards/${cardId}`, {
-            method: 'GET',
-            headers: {
-                'authorization': this.token,
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(res => this._handleFetch(res));
-    }
-
     getInitialCards() {
         return fetch(`${this.url}/cards`, {
             method: 'GET',
@@ -72,7 +61,7 @@ export default class Api {
     }
 
     addLike(elementId) {
-        return fetch(`${this.url}/cards/${elementId}`, {
+        return fetch(`${this.url}/cards/${elementId}/likes`, {
             method: 'PUT',
             headers: {
                 'authorization': this.token,
