@@ -83,8 +83,8 @@ export default class Api {
             .then(res => this._handleFetch(res));
     }
 
-    deleteCard(element) {
-        return fetch(`${this.url}/cards/${element.id}`, {
+    deleteCard(elementId) {
+        return fetch(`${this.url}/cards/${elementId}`, {
             method: 'DELETE',
             headers: {
                 'authorization': this.token,

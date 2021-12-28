@@ -31,4 +31,8 @@ export default class Popup {
   setEventListeners() {
     this._popup.addEventListener('click', this._handleClickClose);
   }
+
+  renderLoading(isLoading) {
+    isLoading ? this._submitBtn.textContent = 'Сохранение...' : this._submitBtn.textContent = 'Сохранить';
+  }
 }
