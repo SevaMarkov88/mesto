@@ -1,9 +1,9 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithConfirmation extends Popup {
-    constructor(popupSelector, formSubmit) {
+    constructor(popupSelector, submitForm) {
         super(popupSelector);
-        this._formSubmit = formSubmit;
+        this._submitForm = submitForm;
         this._form = this._popup.querySelector('form');
         this._handleSubmit = this._handleSubmit.bind(this)
         this._cardId = null;
@@ -12,7 +12,7 @@ export default class PopupWithConfirmation extends Popup {
 
     _handleSubmit = (evt) => {
         evt.preventDefault();
-        this._formSubmit(this._cardId, this._deletefunc);
+        this._submitForm(this._cardId, this._deletefunc);
         this.close();
     }
 

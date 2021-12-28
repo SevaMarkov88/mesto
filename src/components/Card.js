@@ -28,13 +28,13 @@ export default class Card {
         return this._cardBlock;
     }
 
-    isLiked(obj) {
-        return obj.likes.some(user => user._id === this._pageOwnerId);
+    isLiked() {
+        return this._data.likes.some(user => user._id === this._pageOwnerId);
     }
 
     updateLike(obj) {
         this._data = obj;
-        this._likeCounter.textContent = obj.likes.length;
+        this._likeCounter.textContent = this._data.likes.length;
         this._colorLike(obj);
     }
 
@@ -58,7 +58,7 @@ export default class Card {
         this._cardImage.addEventListener('click', () => this._handleCardClick(this._data.name, this._data.link));
     }
 
-    deleteCard(cardElement) {
-        cardElement.remove();
+    deleteCard() {
+        this._cardBlock.remove();
     }
 }

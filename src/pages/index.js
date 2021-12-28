@@ -61,10 +61,10 @@ avatarPopup.setEventListeners();
 //API active
 
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-32',
-    headers: {
-        authorization: '78a9a2e8-0028-4357-9dc5-3dfee740ccb0'
-    }
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-32',
+  headers: {
+    authorization: '78a9a2e8-0028-4357-9dc5-3dfee740ccb0'
+  }
 });
 
 // Listeners
@@ -73,125 +73,125 @@ const api = new Api({
  * active by clicking editButton
  */
 editButton.addEventListener('click', () => {
-    const userInfo = profileInfo.getUserInfo();
-    nameInput.value = userInfo.name;
-    jobInput.value = userInfo.about;
-    profilePopup.open();
-    popupEditValidation.submitButtonDisable();
+  const userInfo = profileInfo.getUserInfo();
+  nameInput.value = userInfo.name;
+  jobInput.value = userInfo.about;
+  profilePopup.open();
+  popupEditValidation.submitButtonDisable();
 });
 /**
  * Clear input field in popupAddCard when opening it
  * active by clicking addButton
  */
 addButton.addEventListener('click', () => {
-    cardPopup.open();
-    popupAddValidation.submitButtonDisable();
+  cardPopup.open();
+  popupAddValidation.submitButtonDisable();
 });
 
 editAvatarButton.addEventListener('click', () => {
-    avatarPopup.open();
-    popupEditAvatarValidation.submitButtonDisable();
+  avatarPopup.open();
+  popupEditAvatarValidation.submitButtonDisable();
 })
 
 //make this when loading page
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-    .then(([user, cards]) => {
-        profileInfo.setUserInfo(user.name, user.about);
-        profileInfo.setUserAvatar(user.avatar);
-        userId = user._id;
-        renderCardsArr.renderContainer(cards);
-    })
-    .catch(err => console.log(err))
+  .then(([user, cards]) => {
+    profileInfo.setUserInfo(user.name, user.about);
+    profileInfo.setUserAvatar(user.avatar);
+    userId = user._id;
+    renderCardsArr.renderContainer(cards);
+  })
+  .catch(err => console.log(err))
 
 
 const renderCardsArr = new Section({
-        renderer: (item) => {
-            renderCardsArr.addItemAppend(createCard(item));
-        }
-    },
-    cardsContainer
+    renderer: (item) => {
+      renderCardsArr.addItemAppend(createCard(item));
+    }
+  },
+  cardsContainer
 );
 
 //functions
 
 function createCard(data) {
-    const cards = new Card(data, cardTemplate, handleCardClick, {
-        handleDeleteCard: (cardId) => {
-        confirmPopup.open(cardId, cards.deleteCard)
-        }
-    }, {
-        handleLike: (card) => {
-            if (cards.isLiked(card)) {
-                api.removeLike(card._id)
-                    .then((res) => {
-                        console.log(res)
-                        cards.updateLike(res)
-                    })
-                    .catch(err => console.log(err))
-            } else {
-                api.addLike(card._id)
-                    .then((res) => {
-                        console.log(res)
-                        cards.updateLike(res);
-                    })
-                    .catch(err => console.log(err))
-            }
-        }
-    }, userId);
-    return cards.createCard();
+  const card = new Card(data, cardTemplate, handleCardClick, {
+    handleDeleteCard: (cardId) => {
+      confirmPopup.open(cardId, cards.deleteCard)
+    }
+  }, {
+    handleLike: (item) => {
+      if (card.isLiked(item)) {
+        api.removeLike(data._id)
+          .then((res) => {
+            console.log(res)
+            card.updateLike(res)
+          })
+          .catch(err => console.log(err))
+      } else {
+        api.addLike(item._id)
+          .then((res) => {
+            console.log(res)
+            card.updateLike(res);
+          })
+          .catch(err => console.log(err))
+      }
+    }
+  }, userId);
+  return card.createCard();
 }
 
 function handleCardClick(name, link) {
-    bigImgPopup.open(name, link);
+  bigImgPopup.open(name, link);
 }
 
 function submitHandlerProfile(inputsArr) {
-    profilePopup.renderLoading(true);
-    profileInfo.setUserInfo(inputsArr.name, inputsArr.job);
-    api.updateUserInfo(inputsArr.name, inputsArr.job)
-        .then(res => {
-            console.log(res);
-            profileInfo.setUserInfo(inputsArr.name, inputsArr.job);
-        })
-        .catch(err => console.log(err))
-        .finally(() => {
-            profilePopup.close();
-            profilePopup.renderLoading(false)
-        })
+  profilePopup.renderLoading(true);
+  api.updateUserInfo(inputsArr.name, inputsArr.job)
+    .then(res => {
+      console.log(res);
+      profileInfo.setUserInfo(inputsArr.name, inputsArr.job);
+      profilePopup.close();
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      profilePopup.renderLoading(false)
+    })
 }
 
 function submitHandlerAvatar(input) {
-    avatarPopup.renderLoading(true);
-    profileInfo.setUserAvatar(input.link)
-    api.updateAvatar(input.link)
-        .then(res => {
-            console.log(res);
-            profileInfo.setUserAvatar(input.link);
-        })
-        .catch(err => console.log(err))
-        .finally(() => {
-            avatarPopup.close();
-            avatarPopup.renderLoading(false)
-        })
+  avatarPopup.renderLoading(true);
+  api.updateAvatar(input.link)
+    .then(res => {
+      console.log(res);
+      profileInfo.setUserAvatar(input.link);
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      avatarPopup.close();
+      avatarPopup.renderLoading(false)
+    })
 }
 
 function submitHandlerCard(inputsArr) {
-    cardPopup.renderLoading(true);
-    api.addNewCard(inputsArr.title, inputsArr.link)
-        .then(res => {
-            console.log(res);
-            renderCardsArr.addItemPrepend(createCard(res));
-        })
-        .catch(err => console.log(err))
-        .finally(() => {
-            cardPopup.close();
-            cardPopup.renderLoading(false)
-        })
+  cardPopup.renderLoading(true);
+  api.addNewCard(inputsArr.title, inputsArr.link)
+    .then(res => {
+      console.log(res);
+      renderCardsArr.addItemPrepend(createCard(res));
+      cardPopup.close();
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      cardPopup.renderLoading(false)
+    })
 }
 
 function submitHandlerConfirm(card, deleteFunc) {
-    api.deleteCard(card.id)
-        .then(() => deleteFunc(card))
-        .catch(err => console.log(err))
-        .finally(() => confirmPopup.close())
+  api.deleteCard(card.id)
+    .then(() => {
+      deleteFunc(card);
+      confirmPopup.close()
+    })
+    .catch(err => console.log(err))
 }
