@@ -115,15 +115,25 @@ const renderCardsArr = new Section({
 //functions
 
 function createCard(data) {
-    const cards = new Card(data, cardTemplate, handleCardClick, handleDeleteCard, {
-        handleLike: () => {
+    const cards = new Card(data, cardTemplate, handleCardClick, {
+        handleDeleteCard: (cardId) => {
+        confirmPopup.open(cardId, cards.deleteCard)
+        }
+    }, {
+        handleLike: (card) => {
             if (cards.isLiked()) {
-                api.removeLike()
-                    .then(res => console.log(res))
+                api.removeLike(card.id)
+                    .then(res => {
+                        console.log(res,card.id);
+                        cards.updateLike(card.id)
+                    })
                     .catch(err => console.log(err))
             } else {
-                api.addLike()
-                    .then(res => console.log(res))
+                api.addLike(card.id)
+                    .then(res => {
+                        console.log(res, card.id);
+                        cards.updateLike(card.id);
+                    })
                     .catch(err => console.log(err))
             }
         }
@@ -179,14 +189,9 @@ function submitHandlerCard(inputsArr) {
         })
 }
 
-function handleDeleteCard(data) {
-    confirmPopup.open(data)
-}
-
-function submitHandlerConfirm(card) {
-    console.log(card);
-    api.deleteCard(card._id)
-        .then(() => card.deleteCard())
+function submitHandlerConfirm(card, deleteFunc) {
+    api.deleteCard(card.id)
+        .then(() => deleteFunc(card))
         .catch(err => console.log(err))
         .finally(() => confirmPopup.close())
 }

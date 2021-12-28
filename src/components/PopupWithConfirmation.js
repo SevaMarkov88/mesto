@@ -6,22 +6,24 @@ export default class PopupWithConfirmation extends Popup {
         this._formSubmit = formSubmit;
         this._form = this._popup.querySelector('form');
         this._handleSubmit = this._handleSubmit.bind(this)
-        this._data = null;
+        this._cardId = null;
+        this._deletefunc = null;
     }
 
     _handleSubmit = (evt) => {
         evt.preventDefault();
-        this._formSubmit(this._data);
+        this._formSubmit(this._cardId, this._deletefunc);
         this.close();
     }
 
-    open(data) {
-        this._data = data;
+    open(cardId, deleteFunc) {
+        this._cardId = cardId;
+        this._deletefunc = deleteFunc;
         super.open()
     }
 
     close() {
-        this._data = null;
+        this._cardId = null;
         super.close();
     }
 

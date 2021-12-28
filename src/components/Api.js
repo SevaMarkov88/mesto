@@ -60,9 +60,8 @@ export default class Api {
             .then(res => this._handleFetch(res))
     }
 
-    removeLike(element) {
-        console.log(element.id)
-        return fetch(`${this.url}/cards/${element.id}/likes`, {
+    removeLike(elementId) {
+        return fetch(`${this.url}/cards/${elementId}/likes`, {
             method: 'DELETE',
             headers: {
                 'authorization': this.token,
@@ -72,8 +71,8 @@ export default class Api {
             .then(res => this._handleFetch(res));
     }
 
-    addLike(element) {
-        return fetch(`${this.url}/cards/${element.id}/likes`, {
+    addLike(elementId) {
+        return fetch(`${this.url}/cards/${elementId}`, {
             method: 'PUT',
             headers: {
                 'authorization': this.token,

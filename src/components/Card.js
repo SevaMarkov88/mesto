@@ -1,5 +1,5 @@
 export default class Card {
-    constructor(data, cardTemplate, handleCardClick, handleDeleteCard, {handleLike}, ownerId) {
+    constructor(data, cardTemplate, handleCardClick, {handleDeleteCard}, {handleLike}, ownerId) {
         this._data = data;
         this._pageOwnerId = ownerId;
         this._cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
@@ -46,18 +46,18 @@ export default class Card {
     }
 
     _setEventListeners() {
-        this._cardBlock.querySelector('.element__like').addEventListener('click', (evt) => {
-            this._handleLike(evt);
+        this._cardBlock.querySelector('.element__like').addEventListener('click', () => {
+            this._handleLike(this._cardBlock);
         });
         if (this._pageOwnerId === this._data.owner._id) {
-            this._cardBlock.querySelector('.element__trash').addEventListener('click', (evt) => {
-                this._handleDeleteCard(evt);
+            this._cardBlock.querySelector('.element__trash').addEventListener('click', () => {
+                this._handleDeleteCard(this._cardBlock);
             });
         }
         this._cardImage.addEventListener('click', () => this._handleCardClick(this._data.name, this._data.link));
     }
 
-    deleteCard() {
-        this._cardBlock.remove();
+    deleteCard(cardElement) {
+        cardElement.remove();
     }
 }
