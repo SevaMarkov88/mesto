@@ -53,7 +53,7 @@ const cardPopup = new PopupWithForm('.popup_add-card', submitHandlerCard);
 cardPopup.setEventListeners();
 const bigImgPopup = new PopupWithImage('.popup_image-fullscreen');
 bigImgPopup.setEventListeners();
-const confirmPopup = new PopupWithConfirmation('.popup_accept-delete');
+const confirmPopup = new PopupWithConfirmation('.popup_accept-delete', submitHandlerConfirm);
 confirmPopup.setEventListeners();
 const avatarPopup = new PopupWithForm('.popup_avatar-edit', submitHandlerAvatar);
 avatarPopup.setEventListeners();
@@ -115,19 +115,7 @@ const renderCardsArr = new Section({
 //functions
 
 function createCard(data) {
-    const cards = new Card(data, cardTemplate, handleCardClick, {
-        handleDeleteCard: (cards) => {
-            confirmPopup.open();
-            confirmPopup.submitHandlerConfirm(() => {
-                api.deleteCard()
-                    .then((res) => {
-                        console.log(res);
-                        cards.deleteCard();
-                    })
-                    .catch(err => console.log(err))
-                    .finally(() => confirmPopup.close())
-            })
-        } }, {
+    const cards = new Card(data, cardTemplate, handleCardClick, handleDeleteCard, {
         handleLike: () => {
             if (cards.isLiked()) {
                 api.removeLike()
@@ -189,4 +177,16 @@ function submitHandlerCard(inputsArr) {
             cardPopup.close();
             cardPopup.renderLoading(false)
         })
+}
+
+function handleDeleteCard(data) {
+    confirmPopup.open(data)
+}
+
+function submitHandlerConfirm(card) {
+    console.log(card);
+    api.deleteCard(card._id)
+        .then(() => card.deleteCard())
+        .catch(err => console.log(err))
+        .finally(() => confirmPopup.close())
 }

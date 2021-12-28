@@ -1,5 +1,5 @@
 export default class Card {
-    constructor(data, cardTemplate, handleCardClick, {handleDeleteCard}, {handleLike}, ownerId) {
+    constructor(data, cardTemplate, handleCardClick, handleDeleteCard, {handleLike}, ownerId) {
         this._data = data;
         this._pageOwnerId = ownerId;
         this._cardBlock = cardTemplate.querySelector('.element').cloneNode(true);
