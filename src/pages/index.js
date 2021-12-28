@@ -9,7 +9,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import {config} from "../utils/configValidation.js";
 import UserInfo from "../components/UserInfo.js";
-// import './index.css';
+import './index.css';
 
 // variables
 
