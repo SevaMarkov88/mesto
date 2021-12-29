@@ -10,8 +10,7 @@ export default class PopupWithConfirmation extends Popup {
   }
 
   _handleSubmit = () => {
-    this._submitForm(this._cardElem);
-    this.close();
+    this._submitForm(this._cardElem)
   }
 
   open(cardElem) {

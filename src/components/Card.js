@@ -35,11 +35,11 @@ export default class Card {
     updateLike(obj) {
         this._data = obj;
         this._likeCounter.textContent = this._data.likes.length;
-        this._colorLike(obj);
+        this._colorLike();
     }
 
-    _colorLike(obj) {
-        if (!this.isLiked(obj)) {
+    _colorLike() {
+        if (!this.isLiked()) {
             this._cardLike.classList.remove('element__like_active');
         } else {
             this._cardLike.classList.add('element__like_active');

@@ -120,8 +120,8 @@ function createCard(data) {
       confirmPopup.open(cardElem)
     }
   }, {
-    handleLike: (item) => {
-      if (card.isLiked(item)) {
+    handleLike: () => {
+      if (card.isLiked()) {
         api.removeLike(data._id)
           .then((res) => {
             console.log(res)
@@ -129,7 +129,7 @@ function createCard(data) {
           })
           .catch(err => console.log(err))
       } else {
-        api.addLike(item._id)
+        api.addLike(data._id)
           .then((res) => {
             console.log(res)
             card.updateLike(res);
@@ -148,8 +148,7 @@ function handleCardClick(name, link) {
 function submitHandlerProfile(inputsArr) {
   profilePopup.renderLoading(true);
   api.updateUserInfo(inputsArr.name, inputsArr.job)
-    .then(res => {
-      console.log(res);
+    .then(() => {
       profileInfo.setUserInfo(inputsArr.name, inputsArr.job);
       profilePopup.close();
     })
@@ -165,10 +164,10 @@ function submitHandlerAvatar(input) {
     .then(res => {
       console.log(res);
       profileInfo.setUserAvatar(input.link);
+      avatarPopup.close();
     })
     .catch(err => console.log(err))
     .finally(() => {
-      avatarPopup.close();
       avatarPopup.renderLoading(false)
     })
 }
