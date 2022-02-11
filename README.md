@@ -17,9 +17,9 @@
 * Валидация форм на стороне клиента
 ---
 
-**Технологии**
+## Технологии:
 
-* Grid Layout, Flex и медиазапросы дают сайту быть адаптивным.
+1. Grid Layout, Flex и медиазапросы дают сайту быть адаптивным.
 ```css
 .elements {
    display: grid;
@@ -29,7 +29,7 @@
    justify-content: center;
 }
 ```
-* JS оживляет проект и добавляет немного магии.
+2. JS оживляет проект и добавляет немного магии.
 ```js
 let elementLike = Array.from(document.querySelectorAll('.element__like'));
 
@@ -39,6 +39,28 @@ elementLike.forEach((img, index) => {
     img.setAttribute('style', 'opacity: 1');
   });
 });
+```
+
+3. Работа с сервером.
+```js
+   _handleFetch(res) {
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+    }
+
+    getUserInfo() {
+        return fetch(`${this.url}/users/me`, {
+            method: 'GET',
+            headers: {
+                'authorization': this.token,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => this._handleFetch(res));
+
+    }
 ```
 
 
